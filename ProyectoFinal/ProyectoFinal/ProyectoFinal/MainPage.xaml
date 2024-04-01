@@ -7,13 +7,13 @@
             <Label Text="Login" FontAttributes="Bold" FontSize="28" />
 
             <!-- Email Entry -->
-            <Entry x:Name="emailInput" Placeholder="Email Address" Keyboard="Email" ReturnType="Done" VerticalOptions="CenterAndExpand"/>
+            <Entry x:Name="user_entry" Placeholder="Email Address" Keyboard="Email" ReturnType="Done" VerticalOptions="CenterAndExpand"/>
 
             <!-- Password Entry -->
-            <Entry x:Name="passwordInput" IsPassword="True" Placeholder="Password" ReturnType="Done" VerticalOptions="CenterAndExpand"/>
+            <Entry x:Name="pass_entry" IsPassword="True" Placeholder="Password" ReturnType="Done" VerticalOptions="CenterAndExpand"/>
 
             <!-- Log In Button -->
-            <Button Text="Log In" HorizontalOptions="Center" Margin="0, 50, 0, 0" />
+            <Button Text="Log In" HorizontalOptions="Center" Margin="0, 50, 0, 0" x:Name="login_btn"/>
         </StackLayout>
 
 </ContentPage>

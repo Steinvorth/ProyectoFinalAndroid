@@ -57,5 +57,20 @@ namespace ProyectoFinal.SupaBase
                 .Where(x => x.Id == clienteId)
                 .Delete();
         }
+
+
+        //Log In
+        public async Task<bool> LoginAsync(string usuario, string password)
+        {
+            // Query the Clientes table for the provided usuario and password
+            var result = await _supabase
+                .From<Cliente>()
+                .Where(x => x.Usuario == usuario && x.Pass == password)
+                .Get();
+
+            // If a matching usuario and password are found, return true; otherwise, return false
+            return result.Models.Count > 0;
+        }
+
     }
 }

@@ -19,6 +19,8 @@ namespace ProyectoFinal
         {
             InitializeComponent();
             InitializeSupaBase();
+
+            login_btn.Clicked += login_btn_Clicked;
         }
 
         private async void InitializeSupaBase()
@@ -33,6 +35,22 @@ namespace ProyectoFinal
             foreach (var cliente in clientes)
             {
                 Debug.WriteLine($"Id: {cliente.Id}, Nombre: {cliente.Nombre}, Apellido: {cliente.Apellido}, Usuario: {cliente.Usuario}, NumTel: {cliente.NumTel}");
+            }
+        }
+
+        public async void login_btn_Clicked(object sender, EventArgs e)
+        {
+            string usuario = user_entry.Text;
+            string pass = pass_entry.Text;
+            var res = await supaBase.LoginAsync(usuario, pass);
+
+            if(!res)
+            {
+                await DisplayAlert("Error", "Usuario o Pass Incorrecto", "OK");
+            }
+            else
+            {
+                await DisplayAlert("Success", "Login Correcto!", "OK");
             }
         }
 

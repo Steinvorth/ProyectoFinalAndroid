@@ -24,5 +24,8 @@ namespace ProyectoFinal.SupaBase
 
         [Column("num_tel")]
         public string NumTel { get; set; }
+
+        [Column("pass")]
+        public string Pass { get; set; }
     }
 }
