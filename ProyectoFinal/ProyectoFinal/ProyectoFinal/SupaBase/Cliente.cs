@@ -7,7 +7,7 @@ using Supabase;
 
 namespace ProyectoFinal.SupaBase
 {
-    [Table("clientes")]
+    [Table("Clientes")]
     public class Cliente : BaseModel
     {
         [PrimaryKey("id")]

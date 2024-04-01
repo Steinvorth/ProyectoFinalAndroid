@@ -18,16 +18,23 @@ namespace ProyectoFinal
         public MainPage()
         {
             InitializeComponent();
-            GetClientes();
+            InitializeSupaBase();
         }
 
-        public void GetClientes()
+        private async void InitializeSupaBase()
         {
-            var clientes = supaBase.GetClientesAsync().Result;
+            supaBase = new SupaBaseDB();
+            await GetClientes();
+        }
+
+        public async Task GetClientes()
+        {
+            var clientes = await supaBase.GetClientesAsync();
             foreach (var cliente in clientes)
             {
                 Debug.WriteLine($"Id: {cliente.Id}, Nombre: {cliente.Nombre}, Apellido: {cliente.Apellido}, Usuario: {cliente.Usuario}, NumTel: {cliente.NumTel}");
             }
-        }   
+        }
+
     }
 }

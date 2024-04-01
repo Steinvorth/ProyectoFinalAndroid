@@ -12,8 +12,9 @@ namespace ProyectoFinal.SupaBase
 
         public SupaBaseDB()
         {
-            var url = Environment.GetEnvironmentVariable("https://qzanjpvwgsiirxipiqxx.supabase.co");
-            var key = Environment.GetEnvironmentVariable("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF6YW5qcHZ3Z3NpaXJ4aXBpcXh4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTE5OTY0NTYsImV4cCI6MjAyNzU3MjQ1Nn0.9IP1L0mbRSnh0-YkOWL7d_PfRPSFA27IjEta9zTepbQ");
+            
+            var url = "https://qzanjpvwgsiirxipiqxx.supabase.co";
+            var key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF6YW5qcHZ3Z3NpaXJ4aXBpcXh4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTE5OTY0NTYsImV4cCI6MjAyNzU3MjQ1Nn0.9IP1L0mbRSnh0-YkOWL7d_PfRPSFA27IjEta9zTepbQ";
 
             if (string.IsNullOrEmpty(url) || string.IsNullOrEmpty(key))
             {
@@ -26,6 +27,7 @@ namespace ProyectoFinal.SupaBase
             };
 
             _supabase = new Supabase.Client(url, key, options);
+            
         }
 
         public async Task<List<Cliente>> GetClientesAsync()
