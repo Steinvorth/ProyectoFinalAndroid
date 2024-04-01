@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Supabase;
 using ProyectoFinal.SupaBase;
-using System.Diagnostics; //Folder de SupaBase connection.
+using System.Diagnostics;
+using ProyectoFinal.Navigation; //Folder de SupaBase connection.
 
 namespace ProyectoFinal
 {
@@ -21,6 +22,12 @@ namespace ProyectoFinal
             InitializeSupaBase();
 
             login_btn.Clicked += login_btn_Clicked;
+            createAcc_btn.Clicked += createAcc_btn_Clicked;
+        }
+
+        private void createAcc_btn_Clicked(object sender, EventArgs e)
+        {
+            ((NavigationPage)this.Parent).PushAsync(new CreateAccount());
         }
 
         private async void InitializeSupaBase()
