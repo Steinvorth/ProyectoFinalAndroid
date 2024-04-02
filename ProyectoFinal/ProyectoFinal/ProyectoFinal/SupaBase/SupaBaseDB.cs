@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ProyectoFinal.SupaBase.Tablas;
 using Supabase;
 using Supabase.Interfaces;
 
@@ -30,6 +31,7 @@ namespace ProyectoFinal.SupaBase
             
         }
 
+        //CRUD Cliente
         public async Task<List<Cliente>> GetClientesAsync()
         {
             var result = await _supabase.From<Cliente>().Get();
@@ -59,7 +61,6 @@ namespace ProyectoFinal.SupaBase
         }
 
 
-        //Log In
         public async Task<bool> LoginAsync(string usuario, string password)
         {
             // Query the Clientes table for the provided usuario and password
@@ -70,6 +71,27 @@ namespace ProyectoFinal.SupaBase
 
             // If a matching usuario and password are found, return true; otherwise, return false
             return result.Models.Count > 0;
+        }
+
+        //CRUD Carrito
+        public async Task<List<Carrito>> GetCarritosAsync()
+        {
+            var result = await _supabase.From<Carrito>().Get();
+            return result.Models;
+        }
+
+        //CRUD Categoria
+        public async Task<List<Categoria>> GetCategoriasAsync()
+        {
+            var result = await _supabase.From<Categoria>().Get();
+            return result.Models;
+        }
+
+        //CRUD DetalleCarrito
+        public async Task<List<DetalleCarrito>> GetDetalleCarritosAsync()
+        {
+            var result = await _supabase.From<DetalleCarrito>().Get();
+            return result.Models;
         }
 
     }

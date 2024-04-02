@@ -33,15 +33,33 @@ namespace ProyectoFinal
         private async void InitializeSupaBase()
         {
             supaBase = new SupaBaseDB();
-            await GetClientes();
+            await GetBD();
         }
 
-        public async Task GetClientes()
+        public async Task GetBD()
         {
             var clientes = await supaBase.GetClientesAsync();
             foreach (var cliente in clientes)
             {
                 Debug.WriteLine($"Id: {cliente.Id}, Nombre: {cliente.Nombre}, Apellido: {cliente.Apellido}, Usuario: {cliente.Usuario}, NumTel: {cliente.NumTel}");
+            }
+
+            var carritos = await supaBase.GetCarritosAsync();
+            foreach (var carrito in carritos)
+            {
+                Debug.WriteLine($"Id: {carrito.Id}, Fecha Creacion: {carrito.Fecha_Creacion}, Estado: {carrito.Estado}, Cliente: {carrito.Cliente}");
+            }
+
+            var categorias = await supaBase.GetCategoriasAsync();
+            foreach (var categoria in categorias)
+            {
+                Debug.WriteLine($"Id: {categoria.Id}, Nombre: {categoria.Nombre}");
+            }
+
+            var detalleCarrito = await supaBase.GetDetalleCarritosAsync();
+            foreach (var detCarrito in detalleCarrito)
+            {
+                Debug.WriteLine($"Id: {detCarrito.Id}, Id_Carrito: {detCarrito.Id_Carrito}, Id_Producto: {detCarrito.Id_Producto}, Cantidad: {detCarrito.Cantidad}, PrecioUnitario: {detCarrito.Precio_Unitario}, Subtotal {detCarrito.Subtotal}");
             }
         }
 

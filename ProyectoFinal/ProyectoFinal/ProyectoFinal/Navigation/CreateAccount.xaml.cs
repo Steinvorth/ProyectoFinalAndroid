@@ -1,4 +1,5 @@
 ﻿using ProyectoFinal.SupaBase;
+using ProyectoFinal.SupaBase.Tablas;
 using System;
 using System.Collections.Generic;
 using System.Linq;

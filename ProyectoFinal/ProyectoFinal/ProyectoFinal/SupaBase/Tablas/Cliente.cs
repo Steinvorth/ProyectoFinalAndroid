@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Text;
 using Supabase;
 
-namespace ProyectoFinal.SupaBase
+namespace ProyectoFinal.SupaBase.Tablas
 {
     [Table("Clientes")]
     public class Cliente : BaseModel
     {
-        [PrimaryKey("id")]
+        [PrimaryKey("id_cliente")]
         public long Id { get; set; } // Assuming int8 in the database corresponds to long in C#
 
         [Column("nombre")]
