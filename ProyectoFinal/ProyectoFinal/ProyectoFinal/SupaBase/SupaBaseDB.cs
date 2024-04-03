@@ -52,6 +52,7 @@ namespace ProyectoFinal.SupaBase
             try
             {
                 await _supabase.From<Cliente>().Insert(cliente);
+                Debug.WriteLine($"Cliente: {cliente} inserted successfully.");
             }
             catch(Exception ex)
             {
@@ -69,6 +70,8 @@ namespace ProyectoFinal.SupaBase
                 .Where(x => x.Id == clienteId)
                 .Set(x => x.Nombre, newName)
                 .Update();
+
+                Debug.WriteLine($"Cliente Name {newName} with ID {clienteId} has been updated.");
             }
             catch(Exception ex) //Si no fue posible, tira una excepcion con el error.
             {
@@ -107,6 +110,7 @@ namespace ProyectoFinal.SupaBase
                     .Get();
 
                 // If a matching usuario and password are found, return true; otherwise, return false
+                Debug.WriteLine("Login result Successful");
                 return result.Models.Count > 0;
             }
             catch(Exception ex)

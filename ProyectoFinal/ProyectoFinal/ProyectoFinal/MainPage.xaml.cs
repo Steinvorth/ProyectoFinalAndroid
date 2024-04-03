@@ -64,6 +64,9 @@ namespace ProyectoFinal
 
             var deleteCliente = supaBase.DeleteClienteAsync(5);
             Debug.WriteLine($"Cliete Eliminado: {deleteCliente}");
+
+            var updateCliente = supaBase.UpdateClienteAsync(4, "Juanito"); //Actualizo el Nombre "Pedrito, ID=4" a "Juanito ID=4"
+            Debug.WriteLine($"Cliente Actualizado: {updateCliente}");
         }
 
         public async void login_btn_Clicked(object sender, EventArgs e)
