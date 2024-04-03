@@ -7,7 +7,7 @@ using System.Text;
 namespace ProyectoFinal.SupaBase.Tablas
 {
     [Table("Producto")]
-    public class Producto : BaseModel
+    public class Producto : BaseModel //comentario prueba
     {
         [PrimaryKey("id_producto")]
         public long Id { get; set; } // Assuming int8 in the database corresponds to long in C#
