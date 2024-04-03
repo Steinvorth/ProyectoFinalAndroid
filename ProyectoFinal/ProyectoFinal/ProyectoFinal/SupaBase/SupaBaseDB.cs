@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using ProyectoFinal.SupaBase.Tablas;
 using Supabase;
@@ -34,43 +35,86 @@ namespace ProyectoFinal.SupaBase
         //CRUD Cliente
         public async Task<List<Cliente>> GetClientesAsync()
         {
-            var result = await _supabase.From<Cliente>().Get();
-            return result.Models;
+            try
+            {
+                var result = await _supabase.From<Cliente>().Get();
+                return result.Models;
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine("Error getting Clientes: " + ex.Message);
+                return null;
+            }            
         }
 
         public async Task InsertClienteAsync(Cliente cliente)
         {
-            await _supabase.From<Cliente>().Insert(cliente);
+            try
+            {
+                await _supabase.From<Cliente>().Insert(cliente);
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine("Error inserting Cliente: " + ex.Message);
+            }
+            
         }
 
         public async Task UpdateClienteAsync(int clienteId, string newName)
         {
-            await _supabase
+            try //intenta actualizar el cliente del ID ingresado, actualiza el nombre.
+            {
+                await _supabase
                 .From<Cliente>()
                 .Where(x => x.Id == clienteId)
                 .Set(x => x.Nombre, newName)
                 .Update();
+            }
+            catch(Exception ex) //Si no fue posible, tira una excepcion con el error.
+            {
+                Debug.WriteLine($"Error updating Cliente with ID {clienteId}: {ex.Message}");
+            }
+            
         }
 
         public async Task DeleteClienteAsync(int clienteId)
         {
-            await _supabase
+            try
+            {
+                await _supabase
                 .From<Cliente>()
                 .Where(x => x.Id == clienteId)
                 .Delete();
+
+                Debug.WriteLine($"Cliente with ID {clienteId} has been deleted.");
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine($"Error deleting Cliente with ID {clienteId}: {ex.Message}");
+            }
+            
         }
 
 
         public async Task<bool> LoginAsync(string usuario, string password)
         {
-            // Query the Clientes table for the provided usuario and password
-            var result = await _supabase
-                .From<Cliente>()
-                .Where(x => x.Usuario == usuario && x.Pass == password)
-                .Get();
+            try
+            {
+                // Query the Clientes table for the provided usuario and password
+                var result = await _supabase
+                    .From<Cliente>()
+                    .Where(x => x.Usuario == usuario && x.Pass == password)
+                    .Get();
 
-            // If a matching usuario and password are found, return true; otherwise, return false
-            return result.Models.Count > 0;
+                // If a matching usuario and password are found, return true; otherwise, return false
+                return result.Models.Count > 0;
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine("Error logging in: " + ex.Message);
+                return false;
+            }
+            
         }
 
         //CRUD Carrito
