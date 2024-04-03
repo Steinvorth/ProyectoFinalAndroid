@@ -62,11 +62,9 @@ namespace ProyectoFinal
                 Debug.WriteLine($"Id: {detCarrito.Id}, Id_Carrito: {detCarrito.Id_Carrito}, Id_Producto: {detCarrito.Id_Producto}, Cantidad: {detCarrito.Cantidad}, PrecioUnitario: {detCarrito.Precio_Unitario}, Subtotal {detCarrito.Subtotal}");
             }
 
-            var deleteCliente = supaBase.DeleteClienteAsync(5);
-            Debug.WriteLine($"Cliete Eliminado: {deleteCliente}");
+            await supaBase.DeleteClienteAsync(5);
 
-            var updateCliente = supaBase.UpdateClienteAsync(4, "Juanito"); //Actualizo el Nombre "Pedrito, ID=4" a "Juanito ID=4"
-            Debug.WriteLine($"Cliente Actualizado: {updateCliente}");
+            await supaBase.UpdateClienteAsync(4, "Juanito"); //Actualizo el Nombre "Pedrito, ID=4" a "Juanito ID=4"
         }
 
         public async void login_btn_Clicked(object sender, EventArgs e)
