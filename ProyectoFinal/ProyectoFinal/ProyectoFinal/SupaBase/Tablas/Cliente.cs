@@ -27,5 +27,11 @@ namespace ProyectoFinal.SupaBase.Tablas
 
         [Column("pass")]
         public string Pass { get; set; }
+
+        [Column("direccion")]
+        public string Direccion { get; set; }
+
+        [Column("correo")]
+        public string Correo { get; set; }
     }
 }

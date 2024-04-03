@@ -41,7 +41,7 @@ namespace ProyectoFinal
             var clientes = await supaBase.GetClientesAsync();
             foreach (var cliente in clientes)
             {
-                Debug.WriteLine($"Id: {cliente.Id}, Nombre: {cliente.Nombre}, Apellido: {cliente.Apellido}, Usuario: {cliente.Usuario}, NumTel: {cliente.NumTel}");
+                Debug.WriteLine($"Id: {cliente.Id}, Nombre: {cliente.Nombre}, Apellido: {cliente.Apellido}, Usuario: {cliente.Usuario}, NumTel: {cliente.NumTel}, Correo {cliente.Correo}, Direccion: {cliente.Direccion}");
             }
 
             var carritos = await supaBase.GetCarritosAsync();
