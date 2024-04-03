@@ -3,10 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoFinal.Navigation.MenuPrincipal">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+
+            <!-- Button for Carnes -->
+            <Button Text="Carnes" Margin="0,0,0,10" x:Name="carnes"/>
+
+            <!-- Button for Comidas Congeladas -->
+            <Button Text="Comidas Congeladas" Margin="0,0,0,10" x:Name="comida_cong"/>
+
+            <!-- Button for LogOut -->
+            <Button Text="LogOut" x:Name="log_out" />
+
         </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>
