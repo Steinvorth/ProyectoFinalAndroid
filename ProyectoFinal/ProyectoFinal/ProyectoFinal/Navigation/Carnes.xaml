@@ -4,7 +4,7 @@
              x:Class="ProyectoFinal.Navigation.Carnes">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Label Text="Seccion de Carnes!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>

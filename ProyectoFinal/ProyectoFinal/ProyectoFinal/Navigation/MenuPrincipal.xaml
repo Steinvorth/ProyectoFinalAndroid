@@ -2,8 +2,16 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoFinal.Navigation.MenuPrincipal">
-    <ContentPage.Content>
 
+
+    <StackLayout VerticalOptions="FillAndExpand">
+
+        <!-- Top Bar -->
+        <StackLayout Orientation="Horizontal" HeightRequest="50" BackgroundColor="LightGray">
+            <Button Text="Ayuda" HorizontalOptions="StartAndExpand" x:Name="help"/>
+        </StackLayout>
+
+        <!-- Content Area -->
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
 
             <!-- Button for Carnes -->
@@ -17,5 +25,7 @@
 
         </StackLayout>
 
-    </ContentPage.Content>
+    </StackLayout>
+    
+    
 </ContentPage>

@@ -4,7 +4,7 @@
              x:Class="ProyectoFinal.Navigation.AlimentosCongelados">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Label Text="Seccion De Alimentos Congelados!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>
