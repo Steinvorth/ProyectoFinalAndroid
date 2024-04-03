@@ -80,6 +80,7 @@ namespace ProyectoFinal
             else
             {
                 await DisplayAlert("Success", "Login Correcto!", "OK");
+                Application.Current.MainPage = new NavigationPage(new MenuPrincipal()); //Reemplaza el MainPage por el MenuPrincipal. Esto permite dar el efecto que la flecha para atras sea al Menu Principal.
             }
         }
 
