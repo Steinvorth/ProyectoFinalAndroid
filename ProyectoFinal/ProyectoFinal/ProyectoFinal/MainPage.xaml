@@ -6,7 +6,7 @@
         <StackLayout Spacing="10" Padding="30, 50, 30, 50">
             <Label Text="Login" FontAttributes="Bold" FontSize="28" />
 
-            <!-- Email Entry -->
+            <!-- Email Entryy -->
             <Entry x:Name="user_entry" Placeholder="usuario" Keyboard="Email" ReturnType="Done" VerticalOptions="CenterAndExpand"/>
 
             <!-- Password Entry -->
