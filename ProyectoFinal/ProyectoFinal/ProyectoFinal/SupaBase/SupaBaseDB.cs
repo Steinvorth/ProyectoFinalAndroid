@@ -143,11 +143,12 @@ namespace ProyectoFinal.SupaBase
                 .Where(x => x.Id == productoId)
                 .Delete();
 
-                Debug.WriteLine($"Cliente with ID {productoId} has been deleted.");
+                Debug.WriteLine($"Producto with ID {productoId} has been deleted.");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error deleting Cliente with ID {productoId}: {ex.Message}");
+                Debug.WriteLine($"Error deleting Producto with ID {productoId}: {ex.Message}");
+                throw new Exception($"Error deleting Producto with ID {productoId}: {ex.Message}");                
             }
         }
 

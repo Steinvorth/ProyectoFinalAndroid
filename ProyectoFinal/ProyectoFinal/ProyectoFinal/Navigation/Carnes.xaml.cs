@@ -1,4 +1,6 @@
 ﻿using ProyectoFinal.SupaBase;
+using ProyectoFinal.SupaBase.Tablas;
+using Supabase.Storage.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,9 +32,37 @@ namespace ProyectoFinal.Navigation
             }
         }
 
-        private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void DeleteButton_Clicked(object sender, EventArgs e)
         {
-            // Handle item selection here if needed
+            try
+            {
+                // Conseguimos el boton que fue presionado
+                Button deleteButton = (Button)sender;
+
+                // Conseguimos el objeto de Producto
+                Producto item = (Producto)deleteButton.BindingContext;
+
+                // Extraemos el ID del objeto
+                int itemId = item.Id;
+
+                // llamamos el Task Delete
+                await DeleteProducto(itemId);
+
+                //refresh page                
+                LoadCarnes();
+
+                //mesaje de Success
+                await DisplayAlert("Success", "Se ha eliminado el producto Exitosamente!", "OK");
+            }
+            catch(Exception ex)
+            {
+                await DisplayAlert("Error", $"Error en base de datos: {ex}", "OK");
+            }
+        }
+
+        private async Task DeleteProducto(int itemId)
+        {
+            await supabase.DeleteProducto(itemId);
         }
     }
 }
