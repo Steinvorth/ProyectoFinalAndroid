@@ -10,7 +10,7 @@ namespace ProyectoFinal.SupaBase.Tablas
     public class Producto : BaseModel //comentario prueba ,visto
     {
         [PrimaryKey("id_producto")]
-        public long Id { get; set; } // Assuming int8 in the database corresponds to long in C#
+        public int Id { get; set; } 
 
         [Column("nombre")]
         public string Nombre { get; set; }

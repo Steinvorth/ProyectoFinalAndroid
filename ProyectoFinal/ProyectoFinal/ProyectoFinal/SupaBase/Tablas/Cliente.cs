@@ -11,7 +11,7 @@ namespace ProyectoFinal.SupaBase.Tablas
     public class Cliente : BaseModel
     {
         [PrimaryKey("id_cliente")]
-        public int Id { get; set; } // Assuming int8 in the database corresponds to long in C#
+        public int Id { get; set; }
 
         [Column("nombre")]
         public string Nombre { get; set; }

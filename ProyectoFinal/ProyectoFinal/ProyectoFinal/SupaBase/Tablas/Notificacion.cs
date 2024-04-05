@@ -10,7 +10,7 @@ namespace ProyectoFinal.SupaBase.Tablas
     public class Notificacion : BaseModel
     {
         [PrimaryKey("id_notificacion")]
-        public long Id { get; set; } // Assuming int8 in the database corresponds to long in C#
+        public int Id { get; set; } 
 
         [Column("titulo")]
         public string Titulo { get; set; }

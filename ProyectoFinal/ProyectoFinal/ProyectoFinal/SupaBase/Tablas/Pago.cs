@@ -10,7 +10,7 @@ namespace ProyectoFinal.SupaBase.Tablas
     public class Pago : BaseModel
     {
         [PrimaryKey("id_pago")]
-        public long Id { get; set; } // Assuming int8 in the database corresponds to long in C#
+        public int Id { get; set; } 
 
         [Column("id_orden")]
         public int Id_Orden { get; set; }
