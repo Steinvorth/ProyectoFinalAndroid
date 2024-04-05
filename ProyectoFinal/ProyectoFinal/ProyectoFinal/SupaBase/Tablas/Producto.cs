@@ -28,6 +28,6 @@ namespace ProyectoFinal.SupaBase.Tablas
         public int Id_Categoria { get; set; }
 
         [Column("codigo")]
-        public long Codigo { get; set; }
+        public int Codigo { get; set; }
     }
 }
