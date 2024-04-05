@@ -57,8 +57,7 @@ namespace ProyectoFinal.SupaBase
             catch(Exception ex)
             {
                 Debug.WriteLine("Error inserting Cliente: " + ex.Message);
-            }
-            
+            }            
         }
 
         public async Task UpdateClienteAsync(int clienteId, string newName)
@@ -94,8 +93,7 @@ namespace ProyectoFinal.SupaBase
             catch(Exception ex)
             {
                 Debug.WriteLine($"Error deleting Cliente with ID {clienteId}: {ex.Message}");
-            }
-            
+            }            
         }
 
 
@@ -119,6 +117,51 @@ namespace ProyectoFinal.SupaBase
                 return false;
             }
             
+        }
+
+        //Crud Productos
+        public async Task<List<Producto>> GetProductosAsync()
+        {
+            try
+            {
+                var result = await _supabase.From<Producto>().Get();
+                return result.Models;
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine("Error getting Productos: " + ex.Message);
+                return null;
+            }            
+        }
+
+        public async Task DeleteProducto(int productoId)
+        {
+            try
+            {
+                await _supabase
+                .From<Producto>()
+                .Where(x => x.Id == productoId)
+                .Delete();
+
+                Debug.WriteLine($"Cliente with ID {productoId} has been deleted.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error deleting Cliente with ID {productoId}: {ex.Message}");
+            }
+        }
+
+        public async Task InsertProducto(Producto producto)
+        {
+            try
+            {
+                await _supabase.From<Producto>().Insert(producto);
+                Debug.WriteLine($"Producto: {producto} inserted successfully.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error inserting Producto: " + ex.Message);
+            }
         }
 
         //CRUD Carrito
