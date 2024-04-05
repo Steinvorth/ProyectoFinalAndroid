@@ -36,7 +36,7 @@
                             <!-- Buttons -->
                             <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="End">
                                 <!-- Add your buttons here -->
-                                <Button Text="Edit" HorizontalOptions="CenterAndExpand" x:Name="edit_btn" />
+                                <Button Text="Edit" HorizontalOptions="CenterAndExpand" x:Name="edit_btn" Clicked="EditButton_Clicked"/>
                                 <Button Text="Delete" HorizontalOptions="CenterAndExpand" x:Name="delete_btn" Clicked="DeleteButton_Clicked"/>
                             </StackLayout>
                         </Grid>

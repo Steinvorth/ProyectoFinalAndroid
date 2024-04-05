@@ -1,4 +1,5 @@
-﻿using ProyectoFinal.SupaBase;
+﻿using ProyectoFinal.Navigation.ObjEdit;
+using ProyectoFinal.SupaBase;
 using ProyectoFinal.SupaBase.Tablas;
 using Supabase.Storage.Exceptions;
 using System;
@@ -30,6 +31,15 @@ namespace ProyectoFinal.Navigation
             {
                 lstCarnes.ItemsSource = carnes;
             }
+        }
+
+        private async void EditButton_Clicked(object sender, EventArgs e)
+        {
+            Button editButton = (Button)sender;
+            Producto item = (Producto)editButton.BindingContext;
+
+            // Navigate to the edit page and pass the selected product as a parameter
+            await Navigation.PushAsync(new EditarProducto(item));
         }
 
         private async void DeleteButton_Clicked(object sender, EventArgs e)
