@@ -41,13 +41,18 @@ namespace ProyectoFinal
             var clientes = await supaBase.GetClientesAsync();
             foreach (var cliente in clientes)
             {
-                Debug.WriteLine($"Id: {cliente.Id}, Nombre: {cliente.Nombre}, Apellido: {cliente.Apellido}, Usuario: {cliente.Usuario}, NumTel: {cliente.NumTel}, Correo {cliente.Correo}, Direccion: {cliente.Direccion}");
+                Debug.WriteLine($"Id: {cliente.Id}, Nombre: {cliente.Nombre}, " +
+                    $"Apellido: {cliente.Apellido}, Usuario: " +
+                    $"{cliente.Usuario}, NumTel: {cliente.NumTel}, Correo " +
+                    $"{cliente.Correo}, Direccion: {cliente.Direccion}");
             }
 
             var carritos = await supaBase.GetCarritosAsync();
             foreach (var carrito in carritos)
             {
-                Debug.WriteLine($"Id: {carrito.Id}, Fecha Creacion: {carrito.Fecha_Creacion}, Estado: {carrito.Estado}, Cliente: {carrito.Cliente}");
+                Debug.WriteLine($"Id: {carrito.Id}, Fecha Creacion: " +
+                    $"{carrito.Fecha_Creacion}, Estado: {carrito.Estado}, " +
+                    $"Cliente: {carrito.Cliente}");
             }
 
             var categorias = await supaBase.GetCategoriasAsync();
@@ -59,12 +64,16 @@ namespace ProyectoFinal
             var detalleCarrito = await supaBase.GetDetalleCarritosAsync();
             foreach (var detCarrito in detalleCarrito)
             {
-                Debug.WriteLine($"Id: {detCarrito.Id}, Id_Carrito: {detCarrito.Id_Carrito}, Id_Producto: {detCarrito.Id_Producto}, Cantidad: {detCarrito.Cantidad}, PrecioUnitario: {detCarrito.Precio_Unitario}, Subtotal {detCarrito.Subtotal}");
+                Debug.WriteLine($"Id: {detCarrito.Id}, Id_Carrito: " +
+                    $"{detCarrito.Id_Carrito}, Id_Producto: {detCarrito.Id_Producto}, " +
+                    $"Cantidad: {detCarrito.Cantidad}, PrecioUnitario: " +
+                    $"{detCarrito.Precio_Unitario}, Subtotal {detCarrito.Subtotal}");
             }
 
             await supaBase.DeleteClienteAsync(5);
 
-            await supaBase.UpdateClienteAsync(4, "Juanito"); //Actualizo el Nombre "Pedrito, ID=4" a "Juanito ID=4"
+            //Actualizo el Nombre "Pedrito, ID=4" a "Juanito ID=4"
+            await supaBase.UpdateClienteAsync(4, "Juanito"); 
         }
 
         public async void login_btn_Clicked(object sender, EventArgs e)
