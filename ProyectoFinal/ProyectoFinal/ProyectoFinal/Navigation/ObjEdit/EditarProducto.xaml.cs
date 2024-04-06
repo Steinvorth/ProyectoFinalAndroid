@@ -39,7 +39,8 @@ namespace ProyectoFinal.Navigation.ObjEdit
 
             foreach (var property in properties)
             {
-                if (property.Name == "BaseUrl" || property.Name == "TableName")
+                // Exclude certain properties by name
+                if (property.Name == "BaseUrl" || property.Name == "TableName" || property.Name == "RequestClientOptions" || property.Name == "PrimaryKey")
                     continue;
 
                 Label propertyNameLabel = new Label();
@@ -59,7 +60,7 @@ namespace ProyectoFinal.Navigation.ObjEdit
                 {
                     DatePicker datePicker = new DatePicker();
                     datePicker.Date = (DateTime)property.GetValue(item);
-                    stackLayout.Children.Add(datePicker);                   
+                    stackLayout.Children.Add(datePicker);
                 }
             }
 
