@@ -21,10 +21,14 @@ namespace ProyectoFinal.Navigation
         public Carnes()
         {
             InitializeComponent();
-            LoadCarnes();
+        }
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await LoadCarnes();
         }
 
-        private async void LoadCarnes()
+        private async Task LoadCarnes()
         {
             var carnes = await supabase.GetProductosAsync();
             if (carnes != null)
