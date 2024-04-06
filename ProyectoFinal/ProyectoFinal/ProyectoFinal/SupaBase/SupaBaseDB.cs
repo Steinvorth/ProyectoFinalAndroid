@@ -165,6 +165,44 @@ namespace ProyectoFinal.SupaBase
             }
         }
 
+        public async Task UpdateProducto(Producto producto)
+        {
+            try
+            {
+                var update = _supabase.From<Producto>()
+                    .Where(x => x.Id == producto.Id);
+
+                if (producto.Nombre != null)
+                    update = update.Set(x => x.Nombre, producto.Nombre);
+
+                if (producto.Descripcion != null)
+                    update = update.Set(x => x.Descripcion, producto.Descripcion);
+
+                if (producto.Precio != null)
+                    update = update.Set(x => x.Precio, producto.Precio);
+
+                if (producto.Id_Categoria != null)
+                    update = update.Set(x => x.Id_Categoria, producto.Id_Categoria);
+
+                if (producto.Codigo != null)
+                    update = update.Set(x => x.Codigo, producto.Codigo);
+
+                if (producto.Imagen != null)
+                    update = update.Set(x => x.Imagen, producto.Imagen);
+
+                await update.Update();
+
+                Debug.WriteLine($"Updated Producto: {producto}");
+                Debug.WriteLine($"Producto with Id {producto.Id} updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error updating Producto: " + ex.Message);
+                throw new Exception($"Error Updating Producto: {ex.Message}");
+            }
+        }
+
+
         //CRUD Carrito
         public async Task<List<Carrito>> GetCarritosAsync()
         {
