@@ -17,15 +17,15 @@
                FontSize="25"
                Margin="0,0,0,50"
                TextColor="Black"/>
-            <Entry x:Name="user_entry" Placeholder="usuario" Keyboard="Email" ReturnType="Done" VerticalOptions="CenterAndExpand"
+            <Entry x:Name="user_entry" Placeholder="Usuario" Keyboard="Email" ReturnType="Done" VerticalOptions="CenterAndExpand" TextColor="Black"
                Margin="0,0,0,10" />
             <Entry x:Name="pass_entry" IsPassword="True" Placeholder="Password" ReturnType="Done" VerticalOptions="CenterAndExpand"
-               Margin="0,0,0,10" />
+               Margin="0,0,0,10" TextColor="Black"/>
             <Button Text="Log In"
                 BackgroundColor="#739364"
                 TextColor="White"
                 CornerRadius="15"
-                x:Name="login_btn" />
+                x:Name="login_btn"  />
             <Button Text="Crear Cuenta" BackgroundColor="#739364" TextColor="White"
                      Margin="0,0,0,10"
                      CornerRadius="15" x:Name="createAcc_btn"/>

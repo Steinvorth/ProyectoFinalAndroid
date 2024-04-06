@@ -1,20 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ProyectoFinal.Navigation.CreateAccount">
+             x:Class="ProyectoFinal.Navigation.CreateAccount"
+             Background="#739364">
     
     <ContentPage.Content>
         
         <StackLayout Padding="20">
-            <Label Text="Create an Account" FontSize="Title" HorizontalOptions="Center" Margin="0,20,0,10" />
+            <Frame CornerRadius="15"
+       BorderColor="Transparent"
+       BackgroundColor="White"
+       Margin="30, 100, 30, 100">
+                <StackLayout>
 
-            <Entry Placeholder="Nombre" x:Name="NombreEntry" Margin="0,0,0,10" />
-            <Entry Placeholder="Apellido" x:Name="ApellidoEntry" Margin="0,0,0,10" />
-            <Entry Placeholder="Usuario" x:Name="UsuarioEntry" Margin="0,0,0,10" />
-            <Entry Placeholder="Número Tel" x:Name="NumTelEntry" Margin="0,0,0,10" />
-            <Entry Placeholder="Password" IsPassword="True" x:Name="PassEntry" Margin="0,0,0,10" />
+                    <Label Text="Crear Cuenta" FontSize="Title" HorizontalOptions="Center" Margin="0,20,0,10" FontAttributes="Bold" TextColor="Black"/>
+                    <Entry Placeholder="Nombre" x:Name="NombreEntry" Margin="0,0,0,10" TextColor="Black" />
+                    <Entry Placeholder="Apellido" x:Name="ApellidoEntry" Margin="0,0,0,10" TextColor="Black" />
+                    <Entry Placeholder="Usuario" x:Name="UsuarioEntry" Margin="0,0,0,10" TextColor="Black" />
+                    <Entry Placeholder="Número Telefónico" x:Name="NumTelEntry" Margin="0,0,0,10" TextColor="Black"/>
+                    <Entry Placeholder="Password" IsPassword="True" x:Name="PassEntry" Margin="0,0,0,10" TextColor="Black" />
 
-            <Button Text="Create Account" HorizontalOptions="FillAndExpand" x:Name="createAcc_btn"/>
+                    <Button Text="Create Account" HorizontalOptions="FillAndExpand" x:Name="createAcc_btn" BackgroundColor="#739364" TextColor="White" Margin="0,0,0,10" CornerRadius="15"/>
+                </StackLayout>
+            </Frame>
         </StackLayout>
         
     </ContentPage.Content>
