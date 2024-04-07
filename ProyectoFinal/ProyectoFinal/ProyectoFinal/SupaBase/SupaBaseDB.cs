@@ -120,11 +120,13 @@ namespace ProyectoFinal.SupaBase
         }
 
         //Crud Productos
-        public async Task<List<Producto>> GetProductosAsync()
+        public async Task<List<Producto>> GetProductosAsync(int idCategoria)
         {
             try
             {
-                var result = await _supabase.From<Producto>().Get();
+                var result = await _supabase.From<Producto>()
+                    .Where(x => x.Id_Categoria == idCategoria)
+                    .Get();
                 return result.Models;
             }
             catch(Exception ex)
@@ -147,8 +149,15 @@ namespace ProyectoFinal.SupaBase
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error deleting Producto with ID {productoId}: {ex.Message}");
-                throw new Exception($"Error deleting Producto with ID {productoId}: {ex.Message}");                
+                if (ex.Message.Contains("referenced"))
+                {
+                    throw new Exception($"Cannot delete item. Item with {productoId} is still referenced in another table.");
+                }
+                else
+                {
+                    Debug.WriteLine($"Error deleting Producto with ID {productoId}: {ex.Message}");
+                    throw new Exception($"Error deleting Producto with ID {productoId}: {ex.Message}");
+                }                              
             }
         }
 
