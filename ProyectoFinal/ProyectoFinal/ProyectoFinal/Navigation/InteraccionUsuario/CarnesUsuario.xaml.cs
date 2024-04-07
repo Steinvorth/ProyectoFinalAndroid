@@ -1,4 +1,5 @@
 ﻿using ProyectoFinal.Navigation.ObjEdit;
+using ProyectoFinal.Navigation.ObjComprar;
 using ProyectoFinal.SupaBase.Tablas;
 using ProyectoFinal.SupaBase;
 using System;
@@ -42,7 +43,7 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
             Producto item = (Producto)editButton.BindingContext;
 
             // Navigate to the edit page and pass the selected product as a parameter
-            await Navigation.PushAsync(new EditarProducto(item));
+            await Navigation.PushAsync(new ComprarProducto(item));
         }
 
         private async void DeleteButton_Clicked(object sender, EventArgs e)
