@@ -7,10 +7,11 @@
     <ContentPage.Content>
         
         <StackLayout Padding="20">
+            <Image Source="https://i.ibb.co/1fgR66k/Frosty-Frost-Logo.png" WidthRequest="200" Margin="0,0,20,0" HeightRequest="150"></Image>
             <Frame CornerRadius="15"
        BorderColor="Transparent"
        BackgroundColor="White"
-       Margin="30, 100, 30, 100">
+       Margin="30, 0, 30, 100">
                 <StackLayout>
 
                     <Label Text="Crear Cuenta" FontSize="Title" HorizontalOptions="Center" Margin="0,20,0,10" FontAttributes="Bold" TextColor="Black"/>

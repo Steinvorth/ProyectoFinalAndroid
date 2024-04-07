@@ -6,7 +6,7 @@
     <ContentPage.Content>
         
         <StackLayout>
-            <Image Source="https://i.ibb.co/2NrLq54/supermarkets.png" WidthRequest="200" Margin="0,0,20,0"></Image>
+            <Image Source="https://i.ibb.co/1fgR66k/Frosty-Frost-Logo.png" WidthRequest="200" Margin="0,0,20,0" HeightRequest="150"></Image>
     <Frame CornerRadius="15"
        BorderColor="Transparent"
        BackgroundColor="White"
