@@ -18,7 +18,7 @@
 
         <Frame BackgroundColor="Gray" BorderColor="Black" Margin="0,-30,0,0">
             <StackLayout>
-                <CollectionView x:Name="lstCarnes" SelectionMode="None" ItemsSource="{Binding AlimentosCongelados}">
+                <CollectionView x:Name="lstCarnes" SelectionMode="None" ItemsSource="{Binding Carnes}">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="5" VerticalItemSpacing="5" />
                     </CollectionView.ItemsLayout>
@@ -27,6 +27,7 @@
                             <Frame BorderColor="Black" CornerRadius="5" Margin="3" Padding="1">
                                 <Grid Padding="10">
                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
@@ -42,14 +43,17 @@
                                     <!-- Precio -->
                                     <Label Text="{Binding Precio}" Grid.Row="2" HorizontalOptions="Start"/>
 
+                                    <!-- Canitdad -->
+                                    <Label Text="{Binding Cantidad}" Grid.Row="3" HorizontalOptions="Start"/>
+
                                     <!-- Buttons -->
-                                    <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,20,0,0" >
+                                    <StackLayout Grid.Row="4" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,20,0,0" >
                                         <!-- Add your buttons here -->
                                         <Button Text="Edit" HorizontalOptions="CenterAndExpand" x:Name="edit_btn" Clicked="EditButton_Clicked" BackgroundColor="#739364" TextColor="White" Margin="0,0,0,10" 
-                                            CornerRadius="15" WidthRequest="70" FontSize="12"/>
+                            CornerRadius="15" WidthRequest="70" FontSize="12"/>
 
                                         <Button Text="Delete" HorizontalOptions="CenterAndExpand" x:Name="delete_btn" Clicked="DeleteButton_Clicked" BackgroundColor="#739364" TextColor="White" Margin="0,0,0,10" 
-                                            CornerRadius="15"  WidthRequest="70" FontSize="12"/>
+                            CornerRadius="15"  WidthRequest="70" FontSize="12"/>
                                     </StackLayout>
                                 </Grid>
                             </Frame>

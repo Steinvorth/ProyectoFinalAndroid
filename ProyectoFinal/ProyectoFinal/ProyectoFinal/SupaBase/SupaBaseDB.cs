@@ -198,6 +198,8 @@ namespace ProyectoFinal.SupaBase
 
                 if (producto.Imagen != null)
                     update = update.Set(x => x.Imagen, producto.Imagen);
+                if(producto.Cantidad != null)
+                    update = update.Set(x => x.Cantidad, producto.Cantidad);
 
                 await update.Update();
 

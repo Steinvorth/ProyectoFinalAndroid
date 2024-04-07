@@ -29,5 +29,8 @@ namespace ProyectoFinal.SupaBase.Tablas
 
         [Column("codigo")]
         public int Codigo { get; set; }
+
+        [Column("cantidad")]
+        public string Cantidad { get; set; }
     }
 }
