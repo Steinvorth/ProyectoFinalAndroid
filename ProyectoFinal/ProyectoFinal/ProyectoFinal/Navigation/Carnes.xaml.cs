@@ -30,7 +30,7 @@ namespace ProyectoFinal.Navigation
 
         private async Task LoadCarnes()
         {
-            var carnes = await supabase.GetProductosAsync();
+            var carnes = await supabase.GetProductosAsync(1);
             if (carnes != null)
             {
                 lstCarnes.ItemsSource = carnes;
@@ -63,7 +63,7 @@ namespace ProyectoFinal.Navigation
                 await DeleteProducto(itemId);
 
                 //refresh page                
-                LoadCarnes();
+                await LoadCarnes();
 
                 //mesaje de Success
                 await DisplayAlert("Success", "Se ha eliminado el producto Exitosamente!", "OK");
