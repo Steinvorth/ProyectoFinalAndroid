@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ProyectoFinal.Navigation.InteraccionUsuario;
+using ProyectoFinal.SupaBase.Tablas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +14,12 @@ namespace ProyectoFinal.Navigation
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MenuPrincipal : ContentPage
     {
-        public MenuPrincipal()
+        string username;
+        public MenuPrincipal(string usuario)
         {
             InitializeComponent();
+
+            this.username = usuario;
 
             comida_cong.Clicked += comida_cong_Clicked;
             carnes.Clicked += carnes_ClickedAsync;
@@ -31,13 +36,29 @@ namespace ProyectoFinal.Navigation
         //Navigation a Carnes Page
         private async void carnes_ClickedAsync(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Carnes());
+            if (username.Equals("admin")) 
+            {
+                await Navigation.PushAsync(new Carnes());
+            }
+            else
+            {
+                await Navigation.PushAsync(new CarnesUsuario());
+            }
+            
         }
 
         //Navigation a Comidas Page
         private async void comida_cong_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new AlimentosCongelados());
+            if (username.Equals("admin"))
+            {
+                await Navigation.PushAsync(new AlimentosCongelados());
+            }
+            else
+            {
+                await Navigation.PushAsync(new AlimentosCongeladosUsuario());
+            }
+            
         }
 
         //Boton de LogOut, Este boton devuelve al LOGIN.

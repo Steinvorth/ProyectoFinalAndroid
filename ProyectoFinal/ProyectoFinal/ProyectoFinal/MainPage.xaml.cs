@@ -33,7 +33,7 @@ namespace ProyectoFinal
         private async void InitializeSupaBase()
         {
             supaBase = new SupaBaseDB();
-            await GetBD();
+            //await GetBD();
         }
 
         public async Task GetBD()
@@ -89,7 +89,9 @@ namespace ProyectoFinal
             else
             {
                 await DisplayAlert("Success", "Login Correcto!", "OK");
-                Application.Current.MainPage = new NavigationPage(new MenuPrincipal()); //Reemplaza el MainPage por el MenuPrincipal. Esto permite dar el efecto que la flecha para atras sea al Menu Principal.
+
+                //El nombre de usuario se va a utilizar para diferenciar entre un usuario final y el ADMIN. El admin puede eliminar y demas, el usuario solo ordernar.
+                Application.Current.MainPage = new NavigationPage(new MenuPrincipal(usuario)); //Reemplaza el MainPage por el MenuPrincipal. Esto permite dar el efecto que la flecha para atras sea al Menu Principal.
             }
         }
 

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoFinal.Navigation.InteraccionUsuario.CarnesUsuario">
+
+    <!-- Main Content -->
+    <StackLayout>
+        <Label Text="Admin" FontSize="Body" HorizontalOptions="Start" Margin="10,10,0,0" TextColor="Black" FontAttributes="Bold"/>
+        <Frame BorderColor="Transparent"
+    BackgroundColor="Gray"
+           CornerRadius="300"
+     Margin="35, 10, 35, 35">
+
+            <StackLayout>
+                <Label Text="Carnes" FontSize="30" HorizontalOptions="Center" Margin="0,-10,0,0" TextColor="White" FontAttributes="Bold"/>
+                <Label Text="Selecciona la carne que deseas editar" FontSize="Medium" HorizontalOptions="Center" Margin="0,0,0,10" TextColor="White" FontAttributes="Bold"/>
+            </StackLayout>
+        </Frame>
+
+        <Frame BackgroundColor="Gray" BorderColor="Black" Margin="0,-30,0,0">
+            <StackLayout>
+                <CollectionView x:Name="lstCarnes" SelectionMode="None" ItemsSource="{Binding Carnes}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="5" VerticalItemSpacing="5" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="Black" CornerRadius="5" Margin="3" Padding="1">
+                                <Grid Padding="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <!-- Name -->
+                                    <Label Text="{Binding Nombre}" Grid.Row="0" FontAttributes="Bold" HorizontalOptions="Start" />
+
+                                    <!-- Description -->
+                                    <Label Text="{Binding Descripcion}" Grid.Row="1" HorizontalOptions="Start" />
+
+                                    <!-- Precio -->
+                                    <Label Text="{Binding Precio}" Grid.Row="2" HorizontalOptions="Start"/>
+
+                                    <!-- Canitdad -->
+                                    <Label Text="{Binding Cantidad}" Grid.Row="3" HorizontalOptions="Start"/>
+
+                                    <!-- Buttons -->
+                                    <StackLayout Grid.Row="4" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,20,0,0" >
+                                        <!-- Add your buttons here -->
+                                        <Button Text="comprar" HorizontalOptions="CenterAndExpand" x:Name="edit_btn" Clicked="EditButton_Clicked" BackgroundColor="#739364" TextColor="White" Margin="0,0,0,10" 
+                                            CornerRadius="15" WidthRequest="70" FontSize="12"/>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+
+
+</ContentPage>
