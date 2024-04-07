@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Reflection;
 
 namespace ProyectoFinal.Navigation.ObjComprar
 {
@@ -16,90 +17,81 @@ namespace ProyectoFinal.Navigation.ObjComprar
     public partial class ComprarProducto : ContentPage
     {
         private object item; //Objeto de la tabla que vamos a editar
-        private StackLayout stackLayout; // Stacklayout que se utilizara para formar el UI dinamicamente a base del objeto que se utilize
         SupaBaseDB supaBase = new SupaBaseDB();
 
-
-        private Dictionary<string, Entry> entryMap = new Dictionary<string, Entry>();
-
+        string nombre, descripcion, cantidad;
+        float precio, montoTotal;
+        int cantidadInicial = 1;
 
         public ComprarProducto(object item)
         {
             InitializeComponent();
             this.item = item;
-            CreateUI();
+            GetProducto();
+
+            btn_mas.Clicked += Btn_mas_Clicked;
+            btn_menos.Clicked += Btn_menos_Clicked;
+            entry_cantidad.Text = cantidadInicial.ToString();
         }
 
-        private void CreateUI()
+        private void Btn_menos_Clicked(object sender, EventArgs e)
         {
-            stackLayout = new StackLayout();
-            Content = stackLayout;
+            if (cantidadInicial != 1)
+            {
+                cantidadInicial--;
+                entry_cantidad.Text = cantidadInicial.ToString();
+                montoTotal = precio * cantidadInicial;
+                total_lbl.Text = "Total: " + montoTotal.ToString();
+            }
+            else
+            {
+                DisplayAlert("Error", $"El minimo que se pued comprar es {cantidad}.", "OK");
+            }
+            
+        }
 
-            var properties = item.GetType().GetProperties();
+        private void Btn_mas_Clicked(object sender, EventArgs e)
+        {
+            cantidadInicial++;
+            entry_cantidad.Text = cantidadInicial.ToString();
+            montoTotal = precio * cantidadInicial;
+            total_lbl.Text = "Total: " + montoTotal.ToString();
+        }
 
+        public void GetProducto()
+        {
+            var productoFiltrado = GetProductoFiltrado();
+
+            nombre = productoFiltrado["Nombre"].ToString();
+            descripcion = productoFiltrado["Descripcion"].ToString();
+            precio = float.Parse(productoFiltrado["Precio"].ToString());
+            cantidad = productoFiltrado["Cantidad"].ToString();
+
+
+            nombre_lbl.Text = nombre;
+            descripcion_lbl.Text = descripcion;
+            precio_lbl.Text = precio.ToString();
+            cantidad_lbl.Text = cantidad;
+        }
+
+        public Dictionary<string, object> GetProductoFiltrado()
+        {
+            var filteredAttributes = new Dictionary<string, object>();
+
+            PropertyInfo[] properties = typeof(Producto).GetProperties();
             foreach (var property in properties)
             {
-                // Exclude certain properties by name
-                if (property.Name == "BaseUrl" || property.Name == "TableName" || property.Name == "RequestClientOptions" || property.Name == "PrimaryKey")
-                    continue;
-
-                Label propertyNameLabel = new Label();
-                propertyNameLabel.Text = property.Name;
-                stackLayout.Children.Add(propertyNameLabel);
-
-                if (property.PropertyType == typeof(string) ||
-                    property.PropertyType == typeof(int) ||
-                    property.PropertyType == typeof(float))
+                // Select only the desired columns
+                if (property.Name == "Nombre" ||
+                    property.Name == "Descripcion" ||
+                    property.Name == "Precio" ||
+                    property.Name == "Cantidad")
                 {
-                    Entry entry = new Entry();
-                    entry.Text = property.GetValue(item)?.ToString();
-                    stackLayout.Children.Add(entry);
-                    entryMap[property.Name] = entry; // Store the entry in the dictionary
-                }
-                else if (property.PropertyType == typeof(DateTime))
-                {
-                    DatePicker datePicker = new DatePicker();
-                    datePicker.Date = (DateTime)property.GetValue(item);
-                    stackLayout.Children.Add(datePicker);
+                    filteredAttributes.Add(property.Name, property.GetValue(item));
                 }
             }
 
-            Button saveButton = new Button();
-            saveButton.Text = "Save";
-            saveButton.Clicked += SaveButton_Clicked;
-            stackLayout.Children.Add(saveButton);
-        }
-
-
-        private async void SaveButton_Clicked(object sender, EventArgs e)
-        {
-            try
-            {
-                foreach (var property in item.GetType().GetProperties())
-                {
-                    if (property.Name == "BaseUrl" || property.Name == "TableName")
-                        continue;
-
-                    if (entryMap.ContainsKey(property.Name))
-                    {
-                        var entry = entryMap[property.Name];
-                        string value = entry.Text;
-                        // Update the value of the corresponding property
-                        property.SetValue(item, Convert.ChangeType(value, property.PropertyType));
-                    }
-                }
-
-                // Update the Producto
-                await supaBase.UpdateProducto((Producto)item);
-
-                Debug.WriteLine("Producto updated successfully.");
-                await Navigation.PopAsync();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Error updating Producto: " + ex.Message);
-                // Handle the error accordingly
-            }
+            return filteredAttributes;
         }
     }
 }

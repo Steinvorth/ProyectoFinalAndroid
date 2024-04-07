@@ -17,10 +17,12 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
     public partial class CarnesUsuario : ContentPage
     {
         SupaBaseDB supabase = new SupaBaseDB();
+        string usuario;
 
-        public CarnesUsuario()
+        public CarnesUsuario(string username)
         {
             InitializeComponent();
+            this.usuario = username;
         }
         protected override async void OnAppearing()
         {
@@ -37,46 +39,13 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
             }
         }
 
-        private async void EditButton_Clicked(object sender, EventArgs e)
+        private async void Comprar_Clicked(object sender, EventArgs e)
         {
             Button editButton = (Button)sender;
             Producto item = (Producto)editButton.BindingContext;
 
             // Navigate to the edit page and pass the selected product as a parameter
             await Navigation.PushAsync(new ComprarProducto(item));
-        }
-
-        private async void DeleteButton_Clicked(object sender, EventArgs e)
-        {
-            try
-            {
-                // Conseguimos el boton que fue presionado
-                Button deleteButton = (Button)sender;
-
-                // Conseguimos el objeto de Producto
-                Producto item = (Producto)deleteButton.BindingContext;
-
-                // Extraemos el ID del objeto
-                int itemId = item.Id;
-
-                // llamamos el Task Delete
-                await DeleteProducto(itemId);
-
-                //refresh page                
-                await LoadCarnes();
-
-                //mesaje de Success
-                await DisplayAlert("Success", "Se ha eliminado el producto Exitosamente!", "OK");
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Error", $"Error en base de datos: {ex}", "OK");
-            }
-        }
-
-        private async Task DeleteProducto(int itemId)
-        {
-            await supabase.DeleteProducto(itemId);
         }
     }
 }

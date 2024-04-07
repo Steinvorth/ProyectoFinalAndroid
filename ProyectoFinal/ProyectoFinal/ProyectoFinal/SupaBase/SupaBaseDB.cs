@@ -33,11 +33,14 @@ namespace ProyectoFinal.SupaBase
         }
 
         //CRUD Cliente
-        public async Task<List<Cliente>> GetClientesAsync()
+        public async Task<List<Cliente>> GetClientesAsync(string username)
         {
             try
             {
-                var result = await _supabase.From<Cliente>().Get();
+                var result = await _supabase.From<Cliente>()
+                    .Where(x => x.Usuario == username)
+                    .Get();
+                Debug.WriteLine($"Cliente encontrado: {result.Models}");
                 return result.Models;
             }
             catch(Exception ex)
@@ -219,6 +222,20 @@ namespace ProyectoFinal.SupaBase
         {
             var result = await _supabase.From<Carrito>().Get();
             return result.Models;
+        }
+
+        public async Task InsertCarrito(Carrito carrito)
+        {
+            try
+            {
+                await _supabase.From<Carrito>().Insert(carrito);
+                Debug.WriteLine("Carrito Creado exitosamente!");
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine("Error al crear el carrito...");
+            }
+            
         }
 
         //CRUD Categoria

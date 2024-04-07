@@ -1,7 +1,9 @@
 ﻿using ProyectoFinal.Navigation.InteraccionUsuario;
+using ProyectoFinal.SupaBase;
 using ProyectoFinal.SupaBase.Tablas;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +17,7 @@ namespace ProyectoFinal.Navigation
     public partial class MenuPrincipal : ContentPage
     {
         string username;
+        SupaBaseDB supabase = new SupaBaseDB();
         public MenuPrincipal(string usuario)
         {
             InitializeComponent();
@@ -42,7 +45,7 @@ namespace ProyectoFinal.Navigation
             }
             else
             {
-                await Navigation.PushAsync(new CarnesUsuario());
+                await Navigation.PushAsync(new CarnesUsuario(username));
             }
             
         }

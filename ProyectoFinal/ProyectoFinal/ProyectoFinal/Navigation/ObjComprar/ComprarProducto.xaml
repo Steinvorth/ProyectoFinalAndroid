@@ -2,11 +2,34 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoFinal.Navigation.ObjComprar.ComprarProducto">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+    
+    <StackLayout Padding="20">
+
+        <!-- Labels ordered vertically -->
+        <Label Text="Nombre:" FontAttributes="Bold" />
+        <Label Text=""  x:Name="nombre_lbl"/>
+
+        <Label Text="Descripcion:" FontAttributes="Bold" />
+        <Label Text=""  x:Name="descripcion_lbl"/>
+
+        <Label Text="Cantidad:" FontAttributes="Bold" />
+        <Label Text=""  x:Name="cantidad_lbl"/>
+
+        <Label Text="Precio:" FontAttributes="Bold"/>
+        <Label Text="" x:Name="precio_lbl"/>
+
+        <!-- Buttons and Entry at the bottom -->
+        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+            <Button Text="+" x:Name="btn_mas" />
+            <Button Text="-" x:Name="btn_menos" />
+
+            <Entry x:Name="entry_cantidad" Text="" WidthRequest="50" Keyboard="Numeric" />
         </StackLayout>
-    </ContentPage.Content>
+
+        <Label Text="Total:" FontAttributes="Bold" x:Name="total_lbl"/>
+        <Button Text="Agregar al carrito" x:Name="btn_comprar"/>
+        
+
+    </StackLayout>
+    
 </ContentPage>

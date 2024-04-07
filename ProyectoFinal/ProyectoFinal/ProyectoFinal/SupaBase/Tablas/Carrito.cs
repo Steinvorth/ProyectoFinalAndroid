@@ -19,6 +19,6 @@ namespace ProyectoFinal.SupaBase.Tablas
         public string Estado { get; set; }
 
         [Column("id_cliente")]
-        public string Cliente { get; set; }
+        public int Cliente { get; set; }
     }
 }
