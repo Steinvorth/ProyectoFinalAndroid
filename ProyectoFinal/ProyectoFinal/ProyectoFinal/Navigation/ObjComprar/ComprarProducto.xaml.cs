@@ -22,6 +22,7 @@ namespace ProyectoFinal.Navigation.ObjComprar
         string nombre, descripcion, cantidad, username;
         float precio, montoTotal;
         int cantidadInicial = 1;
+        int id_producto;
 
         public ComprarProducto(object item, string username)
         {
@@ -34,7 +35,7 @@ namespace ProyectoFinal.Navigation.ObjComprar
             btn_menos.Clicked += Btn_menos_Clicked;
             btn_carrito.Clicked += Btn_carrito_Clicked;
 
-            entry_cantidad.Text = cantidadInicial.ToString();
+            entry_cantidad.Text = cantidadInicial.ToString();           
         }
 
         private async void Btn_carrito_Clicked(object sender, EventArgs e)
@@ -55,17 +56,33 @@ namespace ProyectoFinal.Navigation.ObjComprar
                 {
                     Debug.WriteLine("Carrito already exists for the cliente.");
 
-                    //agregamos la "orden" al carrito
+                    int carritoId = carritos.First(c => c.Id_Cliente == cliente_id).Id;
+                    Debug.WriteLine($"IdCarrito de cliente: {carritoId}");
+
+                    //agregamos la "orden" al carrito --> table detalle Carrito
+                    await supaBase.InsertDetalleCarrito(new DetalleCarrito
+                    {
+                        Id_Carrito = carritoId,
+                        Id_Producto = id_producto,
+                        Cantidad = cantidadInicial,
+                        Precio_Unitario = precio,
+                        Subtotal = montoTotal
+                    });
+
                     return;
                 }
 
                 // Si no existe, entonces le creamos uno.
                 try
                 {
-                    await supaBase.InsertCarrito(new Carrito
+                    var carritoId = await supaBase.InsertCarrito(new Carrito
                     {
-                        Id_Cliente = cliente_id
+                        Id_Cliente = cliente_id,
+                        Estado = "Activo",
+                        Fecha_Creacion = DateTime.Now
                     });
+
+                    Debug.WriteLine($"Carrito created with Id: {carritoId}");
 
                     Debug.WriteLine("New Carrito created successfully!");
 
@@ -114,12 +131,16 @@ namespace ProyectoFinal.Navigation.ObjComprar
             descripcion = productoFiltrado["Descripcion"].ToString();
             precio = float.Parse(productoFiltrado["Precio"].ToString());
             cantidad = productoFiltrado["Cantidad"].ToString();
+            id_producto = int.Parse(productoFiltrado["Id"].ToString());
 
 
             nombre_lbl.Text = nombre;
             descripcion_lbl.Text = descripcion;
             precio_lbl.Text = precio.ToString();
             cantidad_lbl.Text = cantidad;
+
+            montoTotal = precio * cantidadInicial;
+            total_lbl.Text = "Total: " + montoTotal.ToString();
         }
 
         public Dictionary<string, object> GetProductoFiltrado()
@@ -133,7 +154,8 @@ namespace ProyectoFinal.Navigation.ObjComprar
                 if (property.Name == "Nombre" ||
                     property.Name == "Descripcion" ||
                     property.Name == "Precio" ||
-                    property.Name == "Cantidad")
+                    property.Name == "Cantidad" ||
+                    property.Name == "Id")
                 {
                     filteredAttributes.Add(property.Name, property.GetValue(item));
                 }

@@ -224,12 +224,14 @@ namespace ProyectoFinal.SupaBase
             return result.Models;
         }
 
-        public async Task InsertCarrito(Carrito carrito)
+        public async Task<int> InsertCarrito(Carrito carrito)
         {
             try
             {
-                await _supabase.From<Carrito>().Insert(carrito);
+                var res = await _supabase.From<Carrito>().Insert(carrito);
                 Debug.WriteLine("Carrito Creado exitosamente!");
+                
+                return res.Models[0].Id;
             }
             catch(Exception ex)
             {
@@ -239,8 +241,7 @@ namespace ProyectoFinal.SupaBase
                 }
                 Debug.WriteLine("Error al crear el carrito..." + ex);
                 throw new Exception("Error al crear el carrito..." + ex);
-            }
-            
+            }            
         }
 
         //CRUD Categoria
@@ -255,6 +256,20 @@ namespace ProyectoFinal.SupaBase
         {
             var result = await _supabase.From<DetalleCarrito>().Get();
             return result.Models;
+        }
+
+        public async Task InsertDetalleCarrito(DetalleCarrito detalleCarrito)
+        {
+            try
+            {
+                await _supabase.From<DetalleCarrito>().Insert(detalleCarrito);
+                Debug.WriteLine("Carrito Creado exitosamente!");
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine("Error al agregar el detallecarrito..." + ex);
+                throw new Exception("Error al crear el detallecarrito..." + ex);
+            }
         }
 
     }
