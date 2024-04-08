@@ -69,6 +69,8 @@ namespace ProyectoFinal.Navigation.ObjComprar
                         Subtotal = montoTotal
                     });
 
+                    await DisplayAlert("Success", "Se ha agregado al carrito la orden!", "OK");
+
                     return;
                 }
 
@@ -86,7 +88,17 @@ namespace ProyectoFinal.Navigation.ObjComprar
 
                     Debug.WriteLine("New Carrito created successfully!");
 
-                    //le agregamos la orden al carrito
+                    //agregamos la "orden" al carrito --> table detalle Carrito
+                    await supaBase.InsertDetalleCarrito(new DetalleCarrito
+                    {
+                        Id_Carrito = carritoId,
+                        Id_Producto = id_producto,
+                        Cantidad = cantidadInicial,
+                        Precio_Unitario = precio,
+                        Subtotal = montoTotal
+                    });
+
+                    await DisplayAlert("Success", "Se ha agregado al carrito la orden!", "OK");
                 }
                 catch (Exception ex)
                 {
