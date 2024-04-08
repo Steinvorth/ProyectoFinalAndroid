@@ -45,7 +45,7 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
             Producto item = (Producto)editButton.BindingContext;
 
             // Navigate to the edit page and pass the selected product as a parameter
-            await Navigation.PushAsync(new ComprarProducto(item));
+            await Navigation.PushAsync(new ComprarProducto(item, usuario));
         }
     }
 }

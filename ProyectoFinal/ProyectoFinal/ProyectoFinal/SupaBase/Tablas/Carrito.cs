@@ -13,12 +13,12 @@ namespace ProyectoFinal.SupaBase.Tablas
         public int Id { get; set; }
 
         [Column("fecha_creacion")]
-        public string Fecha_Creacion { get; set; }
+        public DateTime Fecha_Creacion { get; set; }
 
         [Column("estado")]
         public string Estado { get; set; }
 
         [Column("id_cliente")]
-        public int Cliente { get; set; }
+        public int Id_Cliente { get; set; }
     }
 }

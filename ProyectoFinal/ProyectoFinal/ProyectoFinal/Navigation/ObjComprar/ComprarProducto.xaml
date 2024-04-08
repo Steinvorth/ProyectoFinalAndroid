@@ -27,7 +27,7 @@
         </StackLayout>
 
         <Label Text="Total:" FontAttributes="Bold" x:Name="total_lbl"/>
-        <Button Text="Agregar al carrito" x:Name="btn_comprar"/>
+        <Button Text="Agregar al carrito" x:Name="btn_carrito"/>
         
 
     </StackLayout>

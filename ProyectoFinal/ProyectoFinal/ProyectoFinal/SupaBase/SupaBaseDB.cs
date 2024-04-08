@@ -233,7 +233,12 @@ namespace ProyectoFinal.SupaBase
             }
             catch(Exception ex)
             {
-                Debug.WriteLine("Error al crear el carrito...");
+                if (ex.Message.Contains("exists"))
+                {
+                    throw new Exception($"Carrito ya Existe!");
+                }
+                Debug.WriteLine("Error al crear el carrito..." + ex);
+                throw new Exception("Error al crear el carrito..." + ex);
             }
             
         }
