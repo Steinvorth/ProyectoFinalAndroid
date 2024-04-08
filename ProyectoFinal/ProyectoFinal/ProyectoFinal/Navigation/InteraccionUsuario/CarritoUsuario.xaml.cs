@@ -40,29 +40,29 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
 
         public async void borrar_item(object sender, EventArgs e)
         {
-            // Cast sender to Button
+            // conseguimos el boton
             var button = sender as Button;
 
-            // Get the BindingContext, which should be the CarritoItem
+            // conseguimos el binding context
             var item = button.BindingContext as CarritoItem;
 
-            // Retrieve the ProductoId from the CommandParameter
+            // conseguimos el produicto id
             int productoId = (int)button.CommandParameter;
 
-            // Check if the item is not null
+            // vemos si existe el item
             if (item != null)
             {
-                // Remove the item from the collection
+                // quitamos el item deseado de la lista
                 carritoItems.Remove(item);
 
-                // Update the ListView's ItemsSource to reflect the changes
+                // Actualizamos para reflejar los cambios
                 listView.ItemsSource = null;
                 listView.ItemsSource = carritoItems;
 
                 float subtotal = carritoItems.Sum(x => x.Subtotal);
                 lbl_totalCompra.Text = $"Total: {subtotal}";
 
-                // Delete the item from the database using the retrieved ProductoId
+                // borramos de la base de datos del carrito
                 await supabase.DeleteDetalleCarrito(carritoId, productoId);
             }
         }

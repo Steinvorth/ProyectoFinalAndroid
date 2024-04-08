@@ -351,5 +351,12 @@ namespace ProyectoFinal.SupaBase
             }
         }
 
+        //CRUD DetalleOrden - Historial de Carrito
+        public async Task<List<DetalleOrden>> GetDetalleOrdenAsync()
+        {
+            var result = await _supabase.From<DetalleOrden>().Get();
+            return result.Models;
+        }
+
     }
 }
