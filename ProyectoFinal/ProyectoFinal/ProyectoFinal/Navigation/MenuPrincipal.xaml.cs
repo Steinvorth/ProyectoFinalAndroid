@@ -66,7 +66,7 @@ namespace ProyectoFinal.Navigation
             }
             else
             {
-                await Navigation.PushAsync(new AlimentosCongeladosUsuario());
+                await Navigation.PushAsync(new AlimentosCongeladosUsuario(username));
             }
             
         }

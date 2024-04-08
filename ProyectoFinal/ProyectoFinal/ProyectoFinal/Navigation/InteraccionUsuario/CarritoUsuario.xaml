@@ -23,6 +23,10 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <Label Text="" x:Name="lbl_totalCompra"/>
+        <Button Text="Comprar" x:Name="comprar_btn"/>
+
     </StackLayout>
 
 </ContentPage>

@@ -30,6 +30,12 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
             this.username = username;
 
             GetCarritoDetails();
+            comprar_btn.Clicked += comprar_btn_Clicked;
+        }
+
+        private void comprar_btn_Clicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         public async void borrar_item(object sender, EventArgs e)
@@ -52,6 +58,9 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
                 // Update the ListView's ItemsSource to reflect the changes
                 listView.ItemsSource = null;
                 listView.ItemsSource = carritoItems;
+
+                float subtotal = carritoItems.Sum(x => x.Subtotal);
+                lbl_totalCompra.Text = $"Total: {subtotal}";
 
                 // Delete the item from the database using the retrieved ProductoId
                 await supabase.DeleteDetalleCarrito(carritoId, productoId);
@@ -79,10 +88,14 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
                     Subtotal = detalle.Subtotal,
                     ProductoId = detalle.Id_Producto
                     
-                });
+                });                
             }
 
             listView.ItemsSource = carritoItems;
+
+            float subtotal = carritoItems.Sum(x => x.Subtotal);
+
+            lbl_totalCompra.Text = $"Total: {subtotal}";
         }
     }
 
