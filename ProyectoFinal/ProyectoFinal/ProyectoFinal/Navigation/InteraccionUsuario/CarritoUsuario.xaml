@@ -8,12 +8,16 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
+
+                        <!--Hay que ajustar lo del espacio-->
                         <StackLayout Orientation="Horizontal">
                             <Label Text="{Binding Nombre}" />
                             <Label Text="{Binding Cantidad}" />
                             <Label Text="{Binding Precio_Unitario}" />
                             <Label Text="{Binding Subtotal}" />
-                            <Button Text="Delete" Clicked="borrar_item" />
+
+
+                            <Button Text="Delete" Clicked="borrar_item" CommandParameter="{Binding ProductoId}"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

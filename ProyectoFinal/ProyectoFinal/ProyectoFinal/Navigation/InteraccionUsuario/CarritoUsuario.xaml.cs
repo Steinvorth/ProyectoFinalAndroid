@@ -18,7 +18,7 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
     public partial class CarritoUsuario : ContentPage
     {
         string username;
-        int clienteId;
+        int clienteId, carritoId, carritoDetalleId, productoId;
         SupaBaseDB supabase = new SupaBaseDB();
 
         List<CarritoItem> carritoItems = new List<CarritoItem>(); //Lista para almacenar los datos juntos y hacer el list item correctamente
@@ -32,40 +32,57 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
             GetCarritoDetails();
         }
 
-        public void borrar_item(object sender, EventArgs e)
+        public async void borrar_item(object sender, EventArgs e)
         {
-            var menuItem = sender as MenuItem;
-            var item = menuItem.CommandParameter as CarritoItem;
+            // Cast sender to Button
+            var button = sender as Button;
 
-            carritoItems.Remove(item);
-            listView.ItemsSource = null;
-            listView.ItemsSource = carritoItems;
+            // Get the BindingContext, which should be the CarritoItem
+            var item = button.BindingContext as CarritoItem;
+
+            // Retrieve the ProductoId from the CommandParameter
+            int productoId = (int)button.CommandParameter;
+
+            // Check if the item is not null
+            if (item != null)
+            {
+                // Remove the item from the collection
+                carritoItems.Remove(item);
+
+                // Update the ListView's ItemsSource to reflect the changes
+                listView.ItemsSource = null;
+                listView.ItemsSource = carritoItems;
+
+                // Delete the item from the database using the retrieved ProductoId
+                await supabase.DeleteDetalleCarrito(carritoId, productoId);
+            }
         }
 
         private async void GetCarritoDetails()
         {
             clienteId = await supabase.GetClienteID(username);
-            int carritoId = await supabase.GetCarritoID(clienteId);
+            carritoId = await supabase.GetCarritoID(clienteId);
 
             var detalleCarrito = await supabase.GetDetalleCarritoCliente(carritoId);
             
             foreach (var detalle in detalleCarrito)
             {
-                int idProducto = detalle.Id_Producto;
+                productoId = detalle.Id_Producto;
 
-                string nombreProd = await supabase.GetProductosName(idProducto);
+                string nombreProd = await supabase.GetProductosName(productoId);
 
                 carritoItems.Add(new CarritoItem
                 {
                     Nombre = nombreProd,
                     Cantidad = detalle.Cantidad,
                     Precio_Unitario = detalle.Precio_Unitario,
-                    Subtotal = detalle.Subtotal
+                    Subtotal = detalle.Subtotal,
+                    ProductoId = detalle.Id_Producto
+                    
                 });
             }
 
             listView.ItemsSource = carritoItems;
-
         }
     }
 
@@ -76,7 +93,7 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
         public int Cantidad { get; set; }
         public float Precio_Unitario { get; set; }
         public float Subtotal { get; set; }
-
+        public int ProductoId { get; set; }
     }
 
 }

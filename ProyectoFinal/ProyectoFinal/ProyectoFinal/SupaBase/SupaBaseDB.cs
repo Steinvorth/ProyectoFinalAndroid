@@ -334,5 +334,22 @@ namespace ProyectoFinal.SupaBase
             }
         }
 
+        public async Task DeleteDetalleCarrito(int idCarrito, int idProducto)
+        {
+            try
+            {
+                await _supabase.From<DetalleCarrito>()
+                    .Where(x => x.Id_Carrito == idCarrito)
+                    .Where(x => x.Id_Producto == idProducto)
+                    .Delete();
+                
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error al borrar el detalle de carrito: {ex}");
+                throw new Exception("Error al borrar el detalle del carrito!");
+            }
+        }
+
     }
 }
