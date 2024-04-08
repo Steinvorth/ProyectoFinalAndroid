@@ -28,6 +28,13 @@ namespace ProyectoFinal.Navigation
             carnes.Clicked += carnes_ClickedAsync;
             log_out.Clicked += log_out_Clicked;
             help.Clicked += help_ClickedAsync;
+
+            carrito.Clicked += carrito_Clicked;
+        }
+
+        private async void carrito_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new CarritoUsuario(username));
         }
 
         private async void help_ClickedAsync(object sender, EventArgs e)

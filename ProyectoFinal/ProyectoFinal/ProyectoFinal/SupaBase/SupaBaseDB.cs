@@ -50,6 +50,23 @@ namespace ProyectoFinal.SupaBase
             }            
         }
 
+        public async Task<int> GetClienteID(string username)
+        {
+            try
+            {
+                var result = await _supabase.From<Cliente>()
+                    .Where(x => x.Usuario == username)
+                    .Get();
+                Debug.WriteLine($"Cliente encontrado: {result.Models}");
+                return result.Models[0].Id;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error getting Cliente: " + ex.Message);
+                throw new Exception($"Error al encontrar el cliente {username}");                
+            }
+        }
+
         public async Task InsertClienteAsync(Cliente cliente)
         {
             try
@@ -139,6 +156,22 @@ namespace ProyectoFinal.SupaBase
             }            
         }
 
+        public async Task<string> GetProductosName(int IdProducto)
+        {
+            try
+            {
+                var result = await _supabase.From<Producto>()
+                    .Where(x => x.Id == IdProducto)
+                    .Get();
+                return result.Models[0].Nombre;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error getting Productos: " + ex.Message);
+                return null;
+            }
+        }
+
         public async Task DeleteProducto(int productoId)
         {
             try
@@ -176,6 +209,8 @@ namespace ProyectoFinal.SupaBase
                 Debug.WriteLine("Error inserting Producto: " + ex.Message);
             }
         }
+
+        
 
         public async Task UpdateProducto(Producto producto)
         {
@@ -224,6 +259,22 @@ namespace ProyectoFinal.SupaBase
             return result.Models;
         }
 
+        public async Task <int> GetCarritoID(int idCliente)
+        {
+            try
+            {
+                var result = await _supabase.From<Carrito>()
+                    .Where(x => x.Id_Cliente == idCliente)
+                    .Get();
+                return result.Models[0].Id;
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine($"Hubo un error al encontrar el carrito del cliente {idCliente}");
+                throw new Exception("Error al encontrar el carrito! Error:", ex);
+            }
+        }
+
         public async Task<int> InsertCarrito(Carrito carrito)
         {
             try
@@ -252,10 +303,21 @@ namespace ProyectoFinal.SupaBase
         }
 
         //CRUD DetalleCarrito
-        public async Task<List<DetalleCarrito>> GetDetalleCarritosAsync()
+        public async Task<List<DetalleCarrito>> GetDetalleCarritoCliente(int idCarrito)
         {
-            var result = await _supabase.From<DetalleCarrito>().Get();
-            return result.Models;
+            try
+            {
+                var result = await _supabase.From<DetalleCarrito>()
+                    .Where(x => x.Id_Carrito == idCarrito)
+                    .Get();
+                return result.Models;
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine($"Error al encontrar el detalle de carrito: {ex}");
+                throw new Exception("Error al encontrar los detalles del carrito!");
+            }
+            
         }
 
         public async Task InsertDetalleCarrito(DetalleCarrito detalleCarrito)
