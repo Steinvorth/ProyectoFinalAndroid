@@ -2,6 +2,7 @@
 using ProyectoFinal.SupaBase.Tablas;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,8 @@ namespace ProyectoFinal.Navigation
     public partial class AgregarProducto : ContentPage
     {
         SupaBaseDB supabase = new SupaBaseDB();
+
+        int id_categoria;
 
         public AgregarProducto()
         {
@@ -32,7 +35,6 @@ namespace ProyectoFinal.Navigation
                 string nombre = nombreEntry.Text;
                 float precio = float.Parse(precioEntry.Text);
                 int codigo = int.Parse(codigoEntry.Text);
-                int categoria = int.Parse(id_categoria.Text);
 
                 await supabase.InsertProducto(new Producto
                 {
@@ -41,7 +43,7 @@ namespace ProyectoFinal.Navigation
                     Nombre = nombre,
                     Precio = precio,
                     Codigo = codigo,
-                    Id_Categoria = categoria
+                    Id_Categoria = id_categoria
                 });
 
                 await Navigation.PopAsync();
@@ -50,8 +52,25 @@ namespace ProyectoFinal.Navigation
             {
                 await DisplayAlert("Error", "Error al insertar el producto", "Ok");
                 Debug.WriteLine(ex.Message);
+            }            
+        }
+
+        private void CategoriaPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Conseguimos la categoria seleccionada
+            string selectedCategory = categoriaPicker.SelectedItem as string;
+
+            if (selectedCategory == "Carnes")
+            {
+                id_categoria = 1;
             }
-            
+            else
+            {
+                id_categoria = 2;
+                
+            }
+
+            Debug.WriteLine($"Selected category: {selectedCategory}, ID: {id_categoria}");
         }
     }
 }

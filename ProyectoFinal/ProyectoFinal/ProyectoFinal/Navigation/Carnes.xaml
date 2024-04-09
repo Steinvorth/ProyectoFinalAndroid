@@ -15,7 +15,7 @@
                 <StackLayout>
                     <Label Text="Carnes" FontSize="30" HorizontalOptions="Center" Margin="0,-10,0,0" TextColor="White" FontAttributes="Bold"/>
                     <Label Text="Selecciona la carne que deseas editar" FontSize="Medium" HorizontalOptions="Center" Margin="0,0,0,10" TextColor="White" FontAttributes="Bold"/>
-                <Button Text="Agregar"  x:Name="btn_agregar"/>
+                    <Button Text="Agregar"  x:Name="btn_agregar"/>
             </StackLayout>
             </Frame>
 

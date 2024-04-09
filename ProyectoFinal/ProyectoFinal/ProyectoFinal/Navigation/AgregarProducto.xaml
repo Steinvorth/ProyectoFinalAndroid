@@ -18,7 +18,14 @@
 
         <!-- Entry 4 -->
         <Label Text="Categoria" />
-        <Entry x:Name="id_categoria" />
+        <Picker x:Name="categoriaPicker" SelectedIndexChanged="CategoriaPicker_SelectedIndexChanged">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Carnes</x:String>
+                    <x:String>Alimentos Congelados</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
 
         <!-- Entry 5 -->
         <Label Text="Código" />
