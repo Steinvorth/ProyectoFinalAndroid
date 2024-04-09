@@ -67,6 +67,12 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
                 //Si el metodo de pago no esta vacio
                 if (!metodoPago.Text.Equals(""))
                 {
+                    //Revisamos que la direccion del cliente no sea null
+                    if(direccion.Equals("") || direccion == null)
+                    {
+                        throw new Exception("No hay una direccion en su cuenta! Agreguela antes de comprar.");
+                    }
+                    
                     int ordenId = await supabase.InsertOrdenCompra(new OrdenCompra
                     {
                         Id_Cliente = clienteId,
@@ -88,6 +94,8 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
                             Id_Orden = ordenId
                         });
                     }
+
+                    
 
                     //hay que insertar el pago
                     await supabase.InsertPago(new Pago
@@ -112,7 +120,7 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", "Error al poner la orden.", "OK");
+                await DisplayAlert("Error", $"Error al poner la orden: {ex.Message}", "OK");
                 Debug.WriteLine("Error: " + ex.Message);
             }
             
@@ -155,43 +163,52 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
 
         private async void GetCarritoDetails()
         {
-            //conseguimos la direccion del cliente desde el inicio para asi poder ingresarla al pago.
-            var clientes = await supabase.GetClientesAsync(username);
-
-            if (clientes != null && clientes.Count > 0)
+            try
             {
-                var cliente = clientes[0];
+                //conseguimos la direccion del cliente desde el inicio para asi poder ingresarla al pago.
+                var clientes = await supabase.GetClientesAsync(username);
 
-                direccion = cliente.Direccion;
-            }
-
-            clienteId = await supabase.GetClienteID(username);
-            carritoId = await supabase.GetCarritoID(clienteId);
-
-            var detalleCarrito = await supabase.GetDetalleCarritoCliente(carritoId);
-            
-            foreach (var detalle in detalleCarrito)
-            {
-                productoId = detalle.Id_Producto;
-
-                string nombreProd = await supabase.GetProductosName(productoId);
-
-                carritoItems.Add(new CarritoItem
+                if (clientes != null && clientes.Count > 0)
                 {
-                    Nombre = nombreProd,
-                    Cantidad = detalle.Cantidad,
-                    Precio_Unitario = detalle.Precio_Unitario,
-                    Subtotal = detalle.Subtotal,
-                    ProductoId = detalle.Id_Producto
-                    
-                });                
+                    var cliente = clientes[0];
+                    if (cliente.Direccion == null || cliente.Direccion.Equals("")) { direccion = ""; }
+
+                    else { direccion = cliente.Direccion; }
+
+                }
+
+                clienteId = await supabase.GetClienteID(username);
+                carritoId = await supabase.GetCarritoID(clienteId);
+
+                var detalleCarrito = await supabase.GetDetalleCarritoCliente(carritoId);
+
+                foreach (var detalle in detalleCarrito)
+                {
+                    productoId = detalle.Id_Producto;
+
+                    string nombreProd = await supabase.GetProductosName(productoId);
+
+                    carritoItems.Add(new CarritoItem
+                    {
+                        Nombre = nombreProd,
+                        Cantidad = detalle.Cantidad,
+                        Precio_Unitario = detalle.Precio_Unitario,
+                        Subtotal = detalle.Subtotal,
+                        ProductoId = detalle.Id_Producto
+
+                    });
+                }
+
+                listView.ItemsSource = carritoItems;
+
+                float subtotal = carritoItems.Sum(x => x.Subtotal);
+
+                lbl_totalCompra.Text = $"Total: {subtotal}";
             }
-
-            listView.ItemsSource = carritoItems;
-
-            float subtotal = carritoItems.Sum(x => x.Subtotal);
-
-            lbl_totalCompra.Text = $"Total: {subtotal}";
+            catch(Exception ex)
+            {
+                Debug.WriteLine("Error: " + ex);
+            }
         }
     }
 
