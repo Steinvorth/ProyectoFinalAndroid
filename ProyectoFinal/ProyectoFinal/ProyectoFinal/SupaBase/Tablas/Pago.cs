@@ -22,6 +22,9 @@ namespace ProyectoFinal.SupaBase.Tablas
         public float Monto { get; set; }
 
         [Column("fecha_pago")]
-        public string Fecha_Pago { get; set; }
+        public DateTime Fecha_Pago { get; set; }
+
+        [Column("direccion_cliente")]
+        public string Direccion { get; set; }
     }
 }

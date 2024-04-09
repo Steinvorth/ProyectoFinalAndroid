@@ -18,7 +18,7 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CarritoUsuario : ContentPage
     {
-        string username;
+        string username, direccion;
         int clienteId, carritoId, carritoDetalleId, productoId;
         SupaBaseDB supabase = new SupaBaseDB();
 
@@ -59,29 +59,47 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
         {
             try
             {  
-                int ordenId = await supabase.InsertOrdenCompra(new OrdenCompra
+                //Si el metodo de pago no esta vacio
+                if (!metodoPago.Text.Equals(""))
                 {
-                    Id_Cliente = clienteId,
-                    Estado = "En Proceso",
-                    Total = carritoItems.Sum(x => x.Subtotal),
-                    Fecha_Creacion = DateTime.Now
-                });
-
-                var detalleCarrito = await supabase.GetDetalleCarritoCliente(carritoId);
-
-                foreach (var detalle in detalleCarrito)
-                {
-                    await supabase.InsertDetalleOrden(new DetalleOrden
+                    int ordenId = await supabase.InsertOrdenCompra(new OrdenCompra
                     {
-                        Id_Producto = detalle.Id_Producto,
-                        Cantidad = detalle.Cantidad,
-                        Precio_Unitario = detalle.Precio_Unitario,
-                        Subtotal = detalle.Subtotal,
-                        Id_Orden = ordenId
+                        Id_Cliente = clienteId,
+                        Estado = "En Proceso",
+                        Total = carritoItems.Sum(x => x.Subtotal),
+                        Fecha_Creacion = DateTime.Now
                     });
+
+                    var detalleCarrito = await supabase.GetDetalleCarritoCliente(carritoId);
+
+                    foreach (var detalle in detalleCarrito)
+                    {
+                        await supabase.InsertDetalleOrden(new DetalleOrden
+                        {
+                            Id_Producto = detalle.Id_Producto,
+                            Cantidad = detalle.Cantidad,
+                            Precio_Unitario = detalle.Precio_Unitario,
+                            Subtotal = detalle.Subtotal,
+                            Id_Orden = ordenId
+                        });
+                    }
+
+                    //hay que insertar el pago
+                    await supabase.InsertPago(new Pago
+                    {
+                        Id_Orden = ordenId,
+                        Metodo_Pago = metodoPago.Text,
+                        Monto = carritoItems.Sum(x => x.Subtotal),
+                        Fecha_Pago = DateTime.Now,
+                        Direccion = direccion
+                    });
+
+                    await DisplayAlert("Orden", "Orden puesta con exito.", "OK");
                 }
-                //hay que insertar el pago
-                await DisplayAlert("Orden", "Orden puesta con exito.", "OK");
+                else
+                {
+                    await DisplayAlert("Error", "El metodo de pago esta vacio!", "OK");
+                }
             }
             catch (Exception ex)
             {
@@ -128,6 +146,16 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
 
         private async void GetCarritoDetails()
         {
+            //conseguimos la direccion del cliente desde el inicio para asi poder ingresarla al pago.
+            var clientes = await supabase.GetClientesAsync(username);
+
+            if (clientes != null && clientes.Count > 0)
+            {
+                var cliente = clientes[0];
+
+                direccion = cliente.Direccion;
+            }
+
             clienteId = await supabase.GetClienteID(username);
             carritoId = await supabase.GetCarritoID(clienteId);
 

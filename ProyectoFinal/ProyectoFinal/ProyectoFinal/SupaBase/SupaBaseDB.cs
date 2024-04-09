@@ -452,9 +452,8 @@ namespace ProyectoFinal.SupaBase
                 throw new Exception("Error al crear la orden");
             }
         }
-
+        
         //Crud Pago
-
         public async Task InsertPago(Pago pago)
         {
             try
