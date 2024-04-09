@@ -21,7 +21,14 @@ namespace ProyectoFinal.Navigation
         public Carnes()
         {
             InitializeComponent();
+            btn_agregar.Clicked += Btn_agregar_Clicked;
         }
+
+        private async void Btn_agregar_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AgregarProducto());
+        }
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();

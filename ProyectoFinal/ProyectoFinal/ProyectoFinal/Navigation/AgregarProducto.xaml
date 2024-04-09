@@ -2,11 +2,34 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoFinal.Navigation.AgregarProducto">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    
+    <StackLayout>
+        <!-- Entry 1 -->
+        <Label Text="Nombre" />
+        <Entry x:Name="nombreEntry" />
+
+        <!-- Entry 2 -->
+        <Label Text="Descripción" />
+        <Entry x:Name="descripcionEntry" />
+
+        <!-- Entry 3 -->
+        <Label Text="Precio" />
+        <Entry x:Name="precioEntry" />
+
+        <!-- Entry 4 -->
+        <Label Text="Categoria" />
+        <Entry x:Name="id_categoria" />
+
+        <!-- Entry 5 -->
+        <Label Text="Código" />
+        <Entry x:Name="codigoEntry" />
+
+        <!-- Entry 6 -->
+        <Label Text="Cantidad" />
+        <Entry x:Name="cantidadEntry" />
+
+        <!-- Button -->
+        <Button Text="Agregar" x:Name="btn_add" />
+    </StackLayout>
+
 </ContentPage>

@@ -208,6 +208,7 @@ namespace ProyectoFinal.SupaBase
             catch (Exception ex)
             {
                 Debug.WriteLine("Error inserting Producto: " + ex.Message);
+                throw new Exception("Error al insertar el producto");
             }
         }
 
@@ -235,8 +236,6 @@ namespace ProyectoFinal.SupaBase
                 if (producto.Codigo != null)
                     update = update.Set(x => x.Codigo, producto.Codigo);
 
-                if (producto.Imagen != null)
-                    update = update.Set(x => x.Imagen, producto.Imagen);
                 if(producto.Cantidad != null)
                     update = update.Set(x => x.Cantidad, producto.Cantidad);
 

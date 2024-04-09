@@ -21,9 +21,6 @@ namespace ProyectoFinal.SupaBase.Tablas
         [Column("precio")]
         public float Precio { get; set; }
 
-        [Column("Imagen")]
-        public string Imagen { get; set; }
-
         [Column("id_categoria")]
         public int Id_Categoria { get; set; }
 
