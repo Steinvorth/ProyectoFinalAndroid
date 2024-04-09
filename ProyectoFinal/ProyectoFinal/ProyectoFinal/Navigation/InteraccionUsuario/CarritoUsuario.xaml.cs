@@ -1,4 +1,5 @@
-﻿using ProyectoFinal.SupaBase;
+﻿using Newtonsoft.Json.Serialization;
+using ProyectoFinal.SupaBase;
 using ProyectoFinal.SupaBase.Tablas;
 using Supabase.Storage.Exceptions;
 using System;
@@ -33,9 +34,41 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
             comprar_btn.Clicked += comprar_btn_Clicked;
         }
 
-        private void comprar_btn_Clicked(object sender, EventArgs e)
+        private async void comprar_btn_Clicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                clienteId = await supabase.GetClienteID(username);
+                carritoId = await supabase.GetCarritoID(clienteId);
+
+                int ordenId = await supabase.InsertOrdenCompra(new OrdenCompra
+                {
+                    Id_Cliente = clienteId,
+                    Estado = "En Proceso",
+                    Total = carritoItems.Sum(x => x.Subtotal),
+                    Fecha_Creacion = DateTime.Now
+                });
+
+                var detalleCarrito = await supabase.GetDetalleCarritoCliente(carritoId);
+
+                foreach (var detalle in detalleCarrito)
+                {
+                    await supabase.InsertDetalleOrden(new DetalleOrden
+                    {
+                        Id_Producto = detalle.Id_Producto,
+                        Cantidad = detalle.Cantidad,
+                        Precio_Unitario = detalle.Precio_Unitario,
+                        Subtotal = detalle.Subtotal,
+                        Id_Orden = ordenId
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", "Error al poner la orden.", "OK");
+                Debug.WriteLine("Error: " + ex.Message);
+            }
+            
         }
 
         public async void borrar_item(object sender, EventArgs e)

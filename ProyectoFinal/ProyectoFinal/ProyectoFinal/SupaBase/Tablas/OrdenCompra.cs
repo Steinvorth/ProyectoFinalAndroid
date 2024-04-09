@@ -22,6 +22,6 @@ namespace ProyectoFinal.SupaBase.Tablas
         public float Total { get; set; }
 
         [Column("fecha_creacion")]
-        public string Fecha_Creacion { get; set; }
+        public DateTime Fecha_Creacion { get; set; }
     }
 }

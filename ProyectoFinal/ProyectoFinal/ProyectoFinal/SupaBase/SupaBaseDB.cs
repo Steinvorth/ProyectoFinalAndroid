@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using ProyectoFinal.SupaBase.Tablas;
 using Supabase;
@@ -356,6 +357,67 @@ namespace ProyectoFinal.SupaBase
         {
             var result = await _supabase.From<DetalleOrden>().Get();
             return result.Models;
+        }
+
+        public async Task<int> GetIdOrden()
+        {
+            try
+            {
+                // Retrieve all DetalleOrden records
+                var result = await _supabase.From<DetalleOrden>().Get();
+
+                // Check if there are any records
+                if (result.Models == null)
+                {
+                    // No records found, return an appropriate value (e.g., -1)
+                    Debug.WriteLine("Returning Cero");
+                    return 0;
+                }
+
+                // Find the record with the highest id_orden
+                int maxIdOrden = result.Models.Max(detalleOrden => detalleOrden.Id_Orden);
+
+                Debug.WriteLine("Returning maxIdOrden", maxIdOrden);
+
+                return maxIdOrden;
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine("Error getting max IdOrden: " + ex.Message);
+                return 0;
+            }
+            
+        }
+
+        public async Task InsertDetalleOrden(DetalleOrden detalleOrden)
+        {
+            try
+            {
+                await _supabase.From<DetalleOrden>()
+                .Insert(detalleOrden);
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine($"Error al insertar detalleOrden:{ex}");
+            }
+        }
+
+        //Crud Oden Compra
+
+        public async Task <int> InsertOrdenCompra(OrdenCompra ordenCompra)
+        {
+            try
+            {
+                var res = await _supabase.From<OrdenCompra>()
+                .Insert(ordenCompra);
+
+                return res.Models[0].Id;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error al insertar detalleOrden:{ex}");
+                throw new Exception("Error al crear la orden");
+            }
         }
 
     }
