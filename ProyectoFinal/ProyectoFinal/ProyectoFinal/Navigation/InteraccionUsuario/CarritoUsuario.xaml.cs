@@ -43,16 +43,21 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
             // Vemos que contesto el usuario
             if (answer)
             {
-                // confirmarmos que se quiere borrar
-                await supabase.DeleteDetalleCarritoAll(carritoId);
-                carritoItems.Clear();
-
-                listView.ItemsSource = null;
-                listView.ItemsSource = carritoItems;
-
-                // Refresh the cart details
-                GetCarritoDetails();
+                await ClearCarrito();
             }
+        }
+
+        private async Task ClearCarrito()
+        {
+            // confirmarmos que se quiere borrar
+            await supabase.DeleteDetalleCarritoAll(carritoId);
+            carritoItems.Clear();
+
+            listView.ItemsSource = null;
+            listView.ItemsSource = carritoItems;
+
+            // Refresh the cart details
+            GetCarritoDetails();
         }
 
         private async void comprar_btn_Clicked(object sender, EventArgs e)
@@ -95,6 +100,10 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
                     });
 
                     await DisplayAlert("Orden", "Orden puesta con exito.", "OK");
+
+                    //limpiamos el carrito y ademas limpiamos la lista
+                    await ClearCarrito();
+                    metodoPago.Text = "";
                 }
                 else
                 {
