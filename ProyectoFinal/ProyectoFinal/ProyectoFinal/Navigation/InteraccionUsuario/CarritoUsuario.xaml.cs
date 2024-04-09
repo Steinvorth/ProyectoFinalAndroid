@@ -32,15 +32,33 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
 
             GetCarritoDetails();
             comprar_btn.Clicked += comprar_btn_Clicked;
+            btn_eliminarCarrito.Clicked += btn_eliminarCarrito_Clicked;
+        }
+
+        private async void btn_eliminarCarrito_Clicked(object sender, EventArgs e)
+        {
+            // Mostramos un alert de alerta para confirmar si se quiere borrar el carrito
+            bool answer = await DisplayAlert("Confirmar", "¿Estás seguro de que quieres eliminar el carrito?", "Sí", "No");
+
+            // Vemos que contesto el usuario
+            if (answer)
+            {
+                // confirmarmos que se quiere borrar
+                await supabase.DeleteDetalleCarritoAll(carritoId);
+                carritoItems.Clear();
+
+                listView.ItemsSource = null;
+                listView.ItemsSource = carritoItems;
+
+                // Refresh the cart details
+                GetCarritoDetails();
+            }
         }
 
         private async void comprar_btn_Clicked(object sender, EventArgs e)
         {
             try
-            {
-                clienteId = await supabase.GetClienteID(username);
-                carritoId = await supabase.GetCarritoID(clienteId);
-
+            {  
                 int ordenId = await supabase.InsertOrdenCompra(new OrdenCompra
                 {
                     Id_Cliente = clienteId,
@@ -73,31 +91,37 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
 
         public async void borrar_item(object sender, EventArgs e)
         {
-            // conseguimos el boton
-            var button = sender as Button;
+            // Mostramos un alert de alerta para confirmar si se quiere borrar el carrito
+            bool answer = await DisplayAlert("Confirmar", "¿Estás seguro de que quieres eliminar el carrito?", "Sí", "No");
 
-            // conseguimos el binding context
-            var item = button.BindingContext as CarritoItem;
-
-            // conseguimos el produicto id
-            int productoId = (int)button.CommandParameter;
-
-            // vemos si existe el item
-            if (item != null)
+            if (answer)
             {
-                // quitamos el item deseado de la lista
-                carritoItems.Remove(item);
+                // conseguimos el boton
+                var button = sender as Button;
 
-                // Actualizamos para reflejar los cambios
-                listView.ItemsSource = null;
-                listView.ItemsSource = carritoItems;
+                // conseguimos el binding context
+                var item = button.BindingContext as CarritoItem;
 
-                float subtotal = carritoItems.Sum(x => x.Subtotal);
-                lbl_totalCompra.Text = $"Total: {subtotal}";
+                // conseguimos el produicto id
+                int productoId = (int)button.CommandParameter;
 
-                // borramos de la base de datos del carrito
-                await supabase.DeleteDetalleCarrito(carritoId, productoId);
-            }
+                // vemos si existe el item
+                if (item != null)
+                {
+                    // quitamos el item deseado de la lista
+                    carritoItems.Remove(item);
+
+                    // Actualizamos para reflejar los cambios
+                    listView.ItemsSource = null;
+                    listView.ItemsSource = carritoItems;
+
+                    float subtotal = carritoItems.Sum(x => x.Subtotal);
+                    lbl_totalCompra.Text = $"Total: {subtotal}";
+
+                    // borramos de la base de datos del carrito
+                    await supabase.DeleteDetalleCarrito(carritoId, productoId);
+                }
+            }            
         }
 
         private async void GetCarritoDetails()
@@ -141,5 +165,4 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
         public float Subtotal { get; set; }
         public int ProductoId { get; set; }
     }
-
 }

@@ -26,6 +26,7 @@
 
         <Label Text="" x:Name="lbl_totalCompra"/>
         <Button Text="Comprar" x:Name="comprar_btn"/>
+        <Button Text="Eliminar carrito" x:Name="btn_eliminarCarrito"/>
 
     </StackLayout>
 

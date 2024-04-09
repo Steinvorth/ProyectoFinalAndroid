@@ -188,7 +188,7 @@ namespace ProyectoFinal.SupaBase
             {
                 if (ex.Message.Contains("referenced"))
                 {
-                    throw new Exception($"Cannot delete item. Item with {productoId} is still referenced in another table.");
+                    throw new Exception($"No se puede eliminar el producto. El item con id:{productoId} esta referenciado en otra tabla.");
                 }
                 else
                 {
@@ -343,6 +343,21 @@ namespace ProyectoFinal.SupaBase
                     .Where(x => x.Id_Producto == idProducto)
                     .Delete();
                 
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error al borrar el detalle de carrito: {ex}");
+                throw new Exception("Error al borrar el detalle del carrito!");
+            }
+        }
+
+        public async Task DeleteDetalleCarritoAll(int idCarrito)
+        {
+            try
+            {
+                await _supabase.From<DetalleCarrito>()
+                    .Where(x => x.Id_Carrito == idCarrito)
+                    .Delete();
             }
             catch (Exception ex)
             {

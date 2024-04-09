@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Diagnostics;
 
 namespace ProyectoFinal.Navigation
 {
@@ -56,27 +57,33 @@ namespace ProyectoFinal.Navigation
         {
             try
             {
-                // Conseguimos el boton que fue presionado
-                Button deleteButton = (Button)sender;
+                bool answer = await DisplayAlert("Confirmar", "¿Estás seguro de que quieres eliminar el carrito?", "Sí", "No");
+                
+                if (answer)
+                {
+                    // Conseguimos el boton que fue presionado
+                    Button deleteButton = (Button)sender;
 
-                // Conseguimos el objeto de Producto
-                Producto item = (Producto)deleteButton.BindingContext;
+                    // Conseguimos el objeto de Producto
+                    Producto item = (Producto)deleteButton.BindingContext;
 
-                // Extraemos el ID del objeto
-                int itemId = item.Id;
+                    // Extraemos el ID del objeto
+                    int itemId = item.Id;
 
-                // llamamos el Task Delete
-                await DeleteProducto(itemId);
+                    // llamamos el Task Delete
+                    await DeleteProducto(itemId);
 
-                //refresh page                
-                await LoadCarnes();
+                    //refresh page                
+                    await LoadCarnes();
 
-                //mesaje de Success
-                await DisplayAlert("Success", "Se ha eliminado el producto Exitosamente!", "OK");
+                    //mesaje de Success
+                    await DisplayAlert("Success", "Se ha eliminado el producto Exitosamente!", "OK");
+                }                
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", $"Error en base de datos: {ex}", "OK");
+                await DisplayAlert("Error", $"Error en base de datos: ", "OK");
+                Debug.WriteLine("Error: " + ex.Message);
             }
         }
 
