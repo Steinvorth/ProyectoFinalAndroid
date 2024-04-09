@@ -40,7 +40,7 @@ namespace ProyectoFinal.Navigation.ObjEdit
             foreach (var property in properties)
             {
                 // Exclude certain properties by name
-                if (property.Name == "BaseUrl" || property.Name == "TableName" || property.Name == "RequestClientOptions" || property.Name == "PrimaryKey")
+                if (property.Name == "BaseUrl" || property.Name == "TableName" || property.Name == "RequestClientOptions" || property.Name == "PrimaryKey" || property.Name == "Id")
                     continue;
 
                 Label propertyNameLabel = new Label();
@@ -90,7 +90,14 @@ namespace ProyectoFinal.Navigation.ObjEdit
                 }
 
                 // Update the Producto
-                await supaBase.UpdateProducto((Producto)item);
+                if (item is Producto)
+                {
+                    await supaBase.UpdateProducto((Producto)item);
+                }
+                else if (item is Cliente)
+                {
+                    await supaBase.UpdateCliente((Cliente)item);
+                }               
 
                 Debug.WriteLine("Producto updated successfully.");
                 await Navigation.PopAsync();

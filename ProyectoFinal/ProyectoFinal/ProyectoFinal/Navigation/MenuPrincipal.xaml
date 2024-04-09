@@ -10,6 +10,7 @@
         <!-- Top Bar -->
         <StackLayout Orientation="Horizontal" HeightRequest="50" BackgroundColor="#739364">
             <Button Text="Ayuda" HorizontalOptions="StartAndExpand" x:Name="help" Margin="0,0,0,0"/>
+            <Button Text="Editar Cuenta" HorizontalOptions="StartAndExpand" x:Name="editar_cuenta" Margin="0,0,0,0"/>
             <ImageButton Source="https://i.ibb.co/5h6C90w/shopping-cart.png" x:Name="carrito" BackgroundColor="#739364" Margin="0,5,10,0"></ImageButton>
         </StackLayout>
 

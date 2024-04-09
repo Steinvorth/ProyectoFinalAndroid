@@ -80,6 +80,8 @@ namespace ProyectoFinal.Navigation.InteraccionUsuario
                         Id_Orden = ordenId
                     });
                 }
+                //hay que insertar el pago
+                await DisplayAlert("Orden", "Orden puesta con exito.", "OK");
             }
             catch (Exception ex)
             {

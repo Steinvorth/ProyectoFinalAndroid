@@ -1,4 +1,5 @@
 ﻿using ProyectoFinal.Navigation.InteraccionUsuario;
+using ProyectoFinal.Navigation.ObjEdit;
 using ProyectoFinal.SupaBase;
 using ProyectoFinal.SupaBase.Tablas;
 using System;
@@ -30,7 +31,31 @@ namespace ProyectoFinal.Navigation
             help.Clicked += help_ClickedAsync;
 
             carrito.Clicked += carrito_Clicked;
+            editar_cuenta.Clicked += editar_cuenta_Clicked;
         }
+
+        private async void editar_cuenta_Clicked(object sender, EventArgs e)
+        {
+            // Retrieve the list of Cliente objects
+            List<Cliente> clientes = await supabase.GetClientesAsync(username);
+
+            // Check if any Cliente objects were retrieved
+            if (clientes != null && clientes.Count > 0)
+            {
+                // Get the first Cliente object from the list
+                Cliente cliente = clientes[0];
+
+                // Navigate to the EditarProducto page and pass the Cliente object
+                await Navigation.PushAsync(new EditarProducto(cliente));
+            }
+            else
+            {
+                // Handle the case where no Cliente objects were found
+                // Display an alert or perform any other action as needed
+                await DisplayAlert("Error", "No se encontró ningún cliente para editar.", "OK");
+            }
+        }
+
 
         private async void carrito_Clicked(object sender, EventArgs e)
         {

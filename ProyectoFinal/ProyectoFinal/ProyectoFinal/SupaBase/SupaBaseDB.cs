@@ -81,23 +81,43 @@ namespace ProyectoFinal.SupaBase
             }            
         }
 
-        public async Task UpdateClienteAsync(int clienteId, string newName)
+        public async Task UpdateCliente(Cliente cliente)
         {
-            try //intenta actualizar el cliente del ID ingresado, actualiza el nombre.
+            try
             {
-                await _supabase
-                .From<Cliente>()
-                .Where(x => x.Id == clienteId)
-                .Set(x => x.Nombre, newName)
-                .Update();
+                var update = _supabase.From<Cliente>()
+                    .Where(x => x.Id == cliente.Id);
 
-                Debug.WriteLine($"Cliente Name {newName} with ID {clienteId} has been updated.");
+                if (cliente.Nombre != null)
+                    update = update.Set(x => x.Nombre, cliente.Nombre);
+
+                if (cliente.Usuario != null)
+                    update = update.Set(x => x.Usuario, cliente.Usuario);
+
+                if (cliente.NumTel != null)
+                    update = update.Set(x => x.NumTel, cliente.NumTel);
+
+                if (cliente.Pass != null)
+                    update = update.Set(x => x.Pass, cliente.Pass);
+
+                if (cliente.Apellido != null)
+                    update = update.Set(x => x.Apellido, cliente.Apellido);
+
+                if (cliente.Direccion != null)
+                    update = update.Set(x => x.Direccion, cliente.Direccion);
+                if(cliente.Correo != null)
+                    update = update.Set(x => x.Correo, cliente.Correo);
+
+                await update.Update();
+
+                Debug.WriteLine($"Updated Producto: {cliente}");
+                Debug.WriteLine($"Producto with Id {cliente.Id} updated successfully.");
             }
-            catch(Exception ex) //Si no fue posible, tira una excepcion con el error.
+            catch (Exception ex)
             {
-                Debug.WriteLine($"Error updating Cliente with ID {clienteId}: {ex.Message}");
+                Debug.WriteLine("Error updating Producto: " + ex.Message);
+                throw new Exception($"Error Updating Producto: {ex.Message}");
             }
-            
         }
 
         public async Task DeleteClienteAsync(int clienteId)
@@ -417,7 +437,6 @@ namespace ProyectoFinal.SupaBase
         }
 
         //Crud Oden Compra
-
         public async Task <int> InsertOrdenCompra(OrdenCompra ordenCompra)
         {
             try
@@ -431,6 +450,21 @@ namespace ProyectoFinal.SupaBase
             {
                 Debug.WriteLine($"Error al insertar detalleOrden:{ex}");
                 throw new Exception("Error al crear la orden");
+            }
+        }
+
+        //Crud Pago
+
+        public async Task InsertPago(Pago pago)
+        {
+            try
+            {
+                await _supabase.From<Pago>().Insert(pago);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error al pagar:{ex}");
+                throw new Exception("Error al crear el pago");
             }
         }
 
