@@ -188,12 +188,12 @@ namespace ProyectoFinal.SupaBase
             {
                 if (ex.Message.Contains("referenced"))
                 {
-                    throw new Exception($"No se puede eliminar el producto. El item con id:{productoId} esta referenciado en otra tabla.");
+                    throw new Exception($"No se puede eliminar el producto. El item con id:{productoId} esta en el carrito de algun cliente.");
                 }
                 else
                 {
                     Debug.WriteLine($"Error deleting Producto with ID {productoId}: {ex.Message}");
-                    throw new Exception($"Error deleting Producto with ID {productoId}: {ex.Message}");
+                    throw new Exception($"Por favor, inténtelo de nuevo más tarde.");
                 }                              
             }
         }
