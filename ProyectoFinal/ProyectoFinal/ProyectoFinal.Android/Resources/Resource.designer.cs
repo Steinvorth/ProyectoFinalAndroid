@@ -266,6 +266,8 @@ namespace ProyectoFinal.Droid
 			global::Xamarin.Forms.Platform.Android.Resource.Animator.fragment_open_enter = global::ProyectoFinal.Droid.Resource.Animator.fragment_open_enter;
 			global::Xamarin.Forms.Platform.Android.Resource.Animator.fragment_open_exit = global::ProyectoFinal.Droid.Resource.Animator.fragment_open_exit;
 			global::Xamarin.Forms.Platform.Android.Resource.Animator.linear_indeterminate_line1_head_interpolator = global::ProyectoFinal.Droid.Resource.Animator.linear_indeterminate_line1_head_interpolator;
+			global::Xamarin.Forms.Platform.Android.Resource.Animator.linear_indeterminate_line1_tail_interpolator = global::ProyectoFinal.Droid.Resource.Animator.linear_indeterminate_line1_tail_interpolator;
+			global::Xamarin.Forms.Platform.Android.Resource.Animator.linear_indeterminate_line2_head_interpolator = global::ProyectoFinal.Droid.Resource.Animator.linear_indeterminate_line2_head_interpolator;
 			global::Xamarin.Forms.Platform.Android.Resource.Animator.linear_indeterminate_line2_tail_interpolator = global::ProyectoFinal.Droid.Resource.Animator.linear_indeterminate_line2_tail_interpolator;
 			global::Xamarin.Forms.Platform.Android.Resource.Animator.mtrl_btn_state_list_anim = global::ProyectoFinal.Droid.Resource.Animator.mtrl_btn_state_list_anim;
 			global::Xamarin.Forms.Platform.Android.Resource.Animator.mtrl_btn_unelevated_state_list_anim = global::ProyectoFinal.Droid.Resource.Animator.mtrl_btn_unelevated_state_list_anim;
