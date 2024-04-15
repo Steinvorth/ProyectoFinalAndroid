@@ -1,6 +1,8 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
+
 
 
 namespace ProyectoFinal
@@ -16,6 +18,8 @@ namespace ProyectoFinal
 
         protected override void OnStart()
         {
+        
+
         }
 
         protected override void OnSleep()
