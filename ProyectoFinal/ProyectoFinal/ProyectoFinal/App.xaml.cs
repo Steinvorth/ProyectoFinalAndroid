@@ -5,6 +5,7 @@ using Xamarin.Essentials;
 using Plugin.SimpleAudioPlayer;
 using System.IO;
 
+
 namespace ProyectoFinal
 {
     public partial class App : Application
@@ -28,7 +29,7 @@ namespace ProyectoFinal
             try
             {
                 player = CrossSimpleAudioPlayer.Current;
-                var stream = await FileSystem.OpenAppPackageFileAsync(Path.Combine("Audio", "tuaudio.mp3"));
+                var stream = await FileSystem.OpenAppPackageFileAsync(Path.Combine("Audio", "Main Theme.mp3"));
                 player.Load(stream);
                 player.Play();
 
