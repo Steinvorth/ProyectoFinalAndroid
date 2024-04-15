@@ -5,7 +5,6 @@
     
     <!-- Main Content -->
     <StackLayout>
-        <Label Text="Cliente" FontSize="Body" HorizontalOptions="Start" Margin="10,10,0,0" TextColor="Black" FontAttributes="Bold"/>
         <Frame BorderColor="Transparent"
     BackgroundColor="#739364"
            CornerRadius="50"
