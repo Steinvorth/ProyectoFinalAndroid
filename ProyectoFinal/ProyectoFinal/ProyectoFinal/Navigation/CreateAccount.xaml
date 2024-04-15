@@ -20,7 +20,6 @@
                     <Entry Placeholder="Usuario" x:Name="UsuarioEntry" Margin="0,0,0,10" TextColor="Black" />
                     <Entry Placeholder="Número Telefónico" x:Name="NumTelEntry" Margin="0,0,0,10" TextColor="Black"/>
                     <Entry Placeholder="Password" IsPassword="True" x:Name="PassEntry" Margin="0,0,0,10" TextColor="Black" />
-
                     <Button Text="Create Account" HorizontalOptions="FillAndExpand" x:Name="createAcc_btn" BackgroundColor="#739364" TextColor="White" Margin="0,0,0,10" CornerRadius="15"/>
                 </StackLayout>
             </Frame>
