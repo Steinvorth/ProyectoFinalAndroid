@@ -2,35 +2,50 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoFinal.Navigation.InteraccionUsuario.CarritoUsuario">
-
+    
     <StackLayout>
-        <ListView x:Name="listView">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-
-                        <!--Hay que ajustar lo del espacio-->
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding Nombre}" />
-                            <Label Text="{Binding Cantidad}" />
-                            <Label Text="{Binding Precio_Unitario}" />
-                            <Label Text="{Binding Subtotal}" />
+        <Frame BorderColor="Transparent" BackgroundColor="#739364"
+       CornerRadius="50" Margin="35, 10, 35, 35">
 
 
-                            <Button Text="Delete" Clicked="borrar_item" CommandParameter="{Binding ProductoId}"/>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            <StackLayout>
+                <Image Source="https://i.ibb.co/1fgR66k/Frosty-Frost-Logo.png" WidthRequest="200" Margin="0,0,20,0" HeightRequest="150"></Image>
+            </StackLayout>
+        </Frame>
+        <Frame>
+            <StackLayout>
+                <ListView x:Name="listView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
 
-        <Label Text="" x:Name="lbl_totalCompra"/>
+                                <!--Hay que ajustar lo del espacio-->
+                                <StackLayout Orientation="Horizontal" >
+                                    
+                                     <Label Text="{Binding Nombre}" />
+                                    <Label Text="{Binding Cantidad}" />
+                                    <Label Text="{Binding Precio_Unitario}" />
+                                    <Label Text="{Binding Subtotal}" />
 
-        <Label Text="Metodo de Pago: "/>
-        <Entry Text="" x:Name="metodoPago"/>
-        <Button Text="Comprar" x:Name="comprar_btn"/>
-        <Button Text="Eliminar carrito" x:Name="btn_eliminarCarrito"/>
 
+                                    <Button Text="Delete" Clicked="borrar_item" CommandParameter="{Binding ProductoId}" BackgroundColor="#739364" TextColor="White" CornerRadius="15" Margin="150,0,0,0" HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <StackLayout>
+                    <Label Text="" x:Name="lbl_totalCompra"/>
+
+                    <Label Text="Metodo de Pago: "/>
+                    <Entry Text="" x:Name="metodoPago"/>
+                    <Button Text="Comprar" x:Name="comprar_btn" BackgroundColor="#739364" TextColor="White" CornerRadius="15"/>
+                    <Button Text="Eliminar carrito" x:Name="btn_eliminarCarrito" BackgroundColor="#739364" TextColor="White" CornerRadius="15"/>
+                </StackLayout>
+
+            </StackLayout>
+        </Frame>
+       
     </StackLayout>
 
 </ContentPage>
