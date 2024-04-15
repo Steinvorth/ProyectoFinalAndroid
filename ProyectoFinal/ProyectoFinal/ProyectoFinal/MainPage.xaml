@@ -3,13 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoFinal.MainPage"
              Background="#739364">
+
     <ContentPage.Content>
-        
+
         <StackLayout>
             <Image Source="https://i.ibb.co/1fgR66k/Frosty-Frost-Logo.png" WidthRequest="200" Margin="0,0,20,0" HeightRequest="150"></Image>
     <Frame CornerRadius="15"
        BorderColor="Transparent"
-       BackgroundColor="White"
+       BackgroundColor="#DDDDDD"
        Margin="85, 12, 85, 100">
         <StackLayout>
             <Label Text="Bienvenido. Para continuar, ingrese su cuenta."
@@ -17,6 +18,7 @@
                FontSize="25"
                Margin="0,0,0,50"
                TextColor="Black"/>
+            
             <Entry x:Name="user_entry" Placeholder="Usuario" Keyboard="Email" ReturnType="Done" VerticalOptions="CenterAndExpand" TextColor="Black"
                Margin="0,0,0,10" />
             <Entry x:Name="pass_entry" IsPassword="True" Placeholder="Password" ReturnType="Done" VerticalOptions="CenterAndExpand"

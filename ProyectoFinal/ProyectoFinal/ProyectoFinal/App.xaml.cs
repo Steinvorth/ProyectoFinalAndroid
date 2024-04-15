@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+
 namespace ProyectoFinal
 {
     public partial class App : Application
@@ -24,5 +25,7 @@ namespace ProyectoFinal
         protected override void OnResume()
         {
         }
+
+      
     }
 }

@@ -12,7 +12,7 @@ using ProyectoFinal.Navigation; //Folder de SupaBase connection.
 
 namespace ProyectoFinal
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage : ContentPage  
     {
         SupaBaseDB supaBase = new SupaBaseDB();
 
@@ -53,6 +53,8 @@ namespace ProyectoFinal
                 Application.Current.MainPage = new NavigationPage(new MenuPrincipal(usuario)); //Reemplaza el MainPage por el MenuPrincipal. Esto permite dar el efecto que la flecha para atras sea al Menu Principal.
             }
         }
+
+      
 
     }
 }
