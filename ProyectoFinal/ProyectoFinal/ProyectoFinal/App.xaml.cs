@@ -3,13 +3,14 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
 using Plugin.SimpleAudioPlayer;
-
-
+using System.IO;
 
 namespace ProyectoFinal
 {
     public partial class App : Application
     {
+        ISimpleAudioPlayer player;
+
         public App()
         {
             InitializeComponent();
@@ -19,32 +20,27 @@ namespace ProyectoFinal
 
         protected override void OnStart()
         {
-
             PlayAudio();
-
         }
 
         private async void PlayAudio()
         {
             try
             {
-                var stream = await FileSystem.OpenAppPackageFileAsync("Main Theme.mp3");
-                await MediaPlayer.PlayAsync(stream);
+                player = CrossSimpleAudioPlayer.Current;
+                var stream = await FileSystem.OpenAppPackageFileAsync(Path.Combine("Audio", "tuaudio.mp3"));
+                player.Load(stream);
+                player.Play();
+
+                // Mensaje de depuración para verificar que el audio se está reproduciendo
+                System.Diagnostics.Debug.WriteLine("Audio reproducido con éxito.");
             }
             catch (Exception ex)
             {
-                
+                // Manejar errores
+                System.Diagnostics.Debug.WriteLine($"Error al reproducir audio: {ex.Message}");
             }
         }
-
-        protected override void OnSleep()
-        {
-        }
-
-        protected override void OnResume()
-        {
-        }
-
-      
     }
 }
+
