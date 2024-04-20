@@ -17,7 +17,8 @@
                HorizontalTextAlignment="Center" 
                FontSize="25"
                Margin="0,0,0,50"
-               TextColor="Black"/>
+               TextColor="Black"
+               FontAttributes="Bold"/>
             
             <Entry x:Name="user_entry" Placeholder="Usuario" Keyboard="Email" ReturnType="Done" VerticalOptions="CenterAndExpand" TextColor="Black"
                Margin="0,0,0,10" />

@@ -9,8 +9,8 @@
 
         <!-- Top Bar -->
         <StackLayout Orientation="Horizontal" HeightRequest="50" BackgroundColor="#739364">
-            <Button Text="Ayuda" HorizontalOptions="StartAndExpand" x:Name="help" Margin="0,0,0,0"/>
-            <Button Text="Editar Cuenta" HorizontalOptions="StartAndExpand" x:Name="editar_cuenta" Margin="0,0,0,0"/>
+            <Button Text="Ayuda" BackgroundColor="White" FontAttributes="Bold" CornerRadius="15" HorizontalOptions="StartAndExpand" x:Name="help" Margin="5,5,0,0"/>
+            <Button Text="Editar Cuenta" HorizontalOptions="StartAndExpand" FontAttributes="Bold" x:Name="editar_cuenta" Margin="0,5,0,0" BackgroundColor="White" CornerRadius="15" />
             <ImageButton Source="https://i.ibb.co/5h6C90w/shopping-cart.png" x:Name="carrito" BackgroundColor="#739364" Margin="0,5,10,0"></ImageButton>
         </StackLayout>
 
@@ -19,12 +19,12 @@
             <StackLayout BackgroundColor="#739364" >
                 <Image Source="https://i.ibb.co/VHJ1205/meat.png" WidthRequest="100" HeightRequest="100" ></Image>
                 <!-- Button for Carnes -->
-                <Button FontAttributes="Bold" Text="Carnes" Margin="0,0,0,10" x:Name="carnes" CornerRadius="15" BackgroundColor="#FF7B85"/>
+                <Button FontAttributes="Bold" Text="Carnes" TextColor="Black" Margin="0,0,0,10" x:Name="carnes" CornerRadius="15" BackgroundColor="#FF7B85"/>
             </StackLayout>
             <StackLayout BackgroundColor="#739364">
                 <Image Source="https://i.ibb.co/RjpLgxs/frozen-food.png" WidthRequest="100" HeightRequest="100"></Image>
                 <!-- Button for Comidas Congeladas -->
-                <Button FontAttributes="Bold" Text="Comidas Congeladas" Margin="0,0,0,10" x:Name="comida_cong" CornerRadius="15" BackgroundColor="#8CC3FA"/>
+                <Button FontAttributes="Bold" Text="Comidas Congeladas" TextColor="Black" Margin="0,0,0,10" x:Name="comida_cong" CornerRadius="15" BackgroundColor="#8CC3FA"/>
             </StackLayout>
             
             

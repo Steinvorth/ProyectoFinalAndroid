@@ -22,24 +22,24 @@
                                 <!--Hay que ajustar lo del espacio-->
                                 <StackLayout Orientation="Horizontal" >
                                     
-                                     <Label Text="{Binding Nombre}" />
-                                    <Label Text="{Binding Cantidad}" />
-                                    <Label Text="{Binding Precio_Unitario}" />
-                                    <Label Text="{Binding Subtotal}" />
+                                    <Label Text="{Binding Nombre} " FontSize="11" TextColor="Black"/>
+                                    <Label Text="{Binding Cantidad} " FontSize="11" TextColor="Black"/>
+                                    <Label Text="{Binding Precio_Unitario} " FontSize="11" TextColor="Black"/>
+                                    <Label Text="{Binding Subtotal} " FontSize="11" Margin="0,0,0,20" TextColor="Black"/>
 
 
-                                    <Button Text="Delete" Clicked="borrar_item" CommandParameter="{Binding ProductoId}" BackgroundColor="#739364" TextColor="White" CornerRadius="15" Margin="150,0,0,0" HorizontalOptions="Center"/>
+                                    <Button Text="Delete" Clicked="borrar_item" CommandParameter="{Binding ProductoId}" BackgroundColor="#739364" TextColor="White" CornerRadius="15" FontAttributes="Bold" Margin="150,0,0,5" HorizontalOptions="Center"/>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
                 <StackLayout>
-                    <Label Text="" x:Name="lbl_totalCompra"/>
+                    <Label Text="" TextColor="Black" x:Name="lbl_totalCompra"/>
 
-                    <Label Text="Metodo de Pago: "/>
+                    <Label Text="Metodo de Pago: " TextColor="Black"/>
                     <Entry Text="" x:Name="metodoPago"/>
-                    <Button Text="Comprar" x:Name="comprar_btn" BackgroundColor="#739364" TextColor="White" CornerRadius="15"/>
+                    <Button Text="Comprar" x:Name="comprar_btn" FontAttributes="Bold" BackgroundColor="#739364" TextColor="White" CornerRadius="15"/>
                     <Button Text="Eliminar carrito" x:Name="btn_eliminarCarrito" BackgroundColor="#739364" TextColor="White" CornerRadius="15"/>
                 </StackLayout>
 
