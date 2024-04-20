@@ -4,30 +4,41 @@
              x:Class="ProyectoFinal.Navigation.ObjComprar.ComprarProducto">
     
     <StackLayout Padding="20">
+        <Frame BorderColor="Transparent"
+BackgroundColor="#739364"
+       CornerRadius="50"
+ Margin="35, 10, 35, 35">
 
-        <!-- Labels ordered vertically -->
-        <Label Text="Nombre:" FontAttributes="Bold" />
-        <Label Text=""  x:Name="nombre_lbl"/>
+            <StackLayout>
+                <Image Source="https://i.ibb.co/1fgR66k/Frosty-Frost-Logo.png" WidthRequest="200" Margin="0,0,20,0" HeightRequest="150"></Image>
+            </StackLayout>
+        </Frame>
+        <Frame>
+            <StackLayout>
+                <Label Text="Nombre:" FontAttributes="Bold" />
+                <Label Text=""  x:Name="nombre_lbl"/>
 
-        <Label Text="Descripcion:" FontAttributes="Bold" />
-        <Label Text=""  x:Name="descripcion_lbl"/>
+                <Label Text="Descripcion:" FontAttributes="Bold" />
+                <Label Text=""  x:Name="descripcion_lbl"/>
 
-        <Label Text="Cantidad:" FontAttributes="Bold" />
-        <Label Text=""  x:Name="cantidad_lbl"/>
+                <Label Text="Cantidad:" FontAttributes="Bold" />
+                <Label Text=""  x:Name="cantidad_lbl"/>
 
-        <Label Text="Precio:" FontAttributes="Bold"/>
-        <Label Text="" x:Name="precio_lbl"/>
+                <Label Text="Precio:" FontAttributes="Bold"/>
+                <Label Text="" x:Name="precio_lbl"/>
+            </StackLayout>
+        </Frame>
 
         <!-- Buttons and Entry at the bottom -->
         <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-            <Button Text="+" x:Name="btn_mas" />
-            <Button Text="-" x:Name="btn_menos" />
+            <Button Text="+" x:Name="btn_mas" BackgroundColor="#739364" CornerRadius="15" FontAttributes="Bold"/>
+            <Button Text="-" x:Name="btn_menos" BackgroundColor="#739364" CornerRadius="15" FontAttributes="Bold"/>
 
             <Entry x:Name="entry_cantidad" Text="" WidthRequest="50" Keyboard="Numeric" />
         </StackLayout>
 
-        <Label Text="Total:" FontAttributes="Bold" x:Name="total_lbl"/>
-        <Button Text="Agregar al carrito" x:Name="btn_carrito"/>
+        <Label Text="Total:" FontAttributes="Bold" x:Name="total_lbl" />
+        <Button Text="Agregar al carrito" x:Name="btn_carrito" BackgroundColor="#739364"/>
         
 
     </StackLayout>
