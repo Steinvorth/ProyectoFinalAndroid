@@ -57,7 +57,7 @@ namespace ProyectoFinal.Navigation
         {
             try
             {
-                bool answer = await DisplayAlert("Confirmar", "¿Estás seguro de que quieres eliminar el carrito?", "Sí", "No");
+                bool answer = await DisplayAlert("Confirmar", "¿Estás seguro de que quieres eliminar el producto?", "Sí", "No");
                 
                 if (answer)
                 {

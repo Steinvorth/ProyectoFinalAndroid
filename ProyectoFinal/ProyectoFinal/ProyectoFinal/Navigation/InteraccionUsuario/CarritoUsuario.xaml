@@ -19,7 +19,6 @@
                         <DataTemplate>
                             <ViewCell>
 
-                                <!--Hay que ajustar lo del espacio-->
                                 <StackLayout Orientation="Horizontal" >
                                     
                                     <Label Text="{Binding Nombre} " FontSize="11" TextColor="Black"/>
