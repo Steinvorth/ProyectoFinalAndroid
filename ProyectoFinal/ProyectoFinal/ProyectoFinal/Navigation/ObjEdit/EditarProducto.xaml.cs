@@ -105,7 +105,6 @@ namespace ProyectoFinal.Navigation.ObjEdit
             catch (Exception ex)
             {
                 Debug.WriteLine("Error updating Producto: " + ex.Message);
-                // Handle the error accordingly
             }
         }
     }

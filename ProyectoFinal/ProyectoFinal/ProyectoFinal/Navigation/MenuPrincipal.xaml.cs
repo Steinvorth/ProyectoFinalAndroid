@@ -59,7 +59,14 @@ namespace ProyectoFinal.Navigation
 
         private async void carrito_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CarritoUsuario(username));
+            if (username.Equals("admin"))
+            {
+                await DisplayAlert("Error", "Como administrador no se puede armar un carrito.", "OK");
+            }
+            else
+            {
+                await Navigation.PushAsync(new CarritoUsuario(username));
+            }            
         }
 
         private async void help_ClickedAsync(object sender, EventArgs e)
