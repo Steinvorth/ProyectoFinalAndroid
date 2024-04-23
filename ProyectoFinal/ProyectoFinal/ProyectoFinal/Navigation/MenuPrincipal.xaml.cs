@@ -61,7 +61,7 @@ namespace ProyectoFinal.Navigation
         {
             if (username.Equals("admin"))
             {
-                await DisplayAlert("Error", "Como administrador no se puede armar un carrito.", "OK");
+                await Navigation.PushAsync(new ProcesoOrden());
             }
             else
             {

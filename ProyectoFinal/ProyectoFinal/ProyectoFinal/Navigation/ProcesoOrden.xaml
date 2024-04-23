@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoFinal.Navigation.ProcesoOrden">
+
+    <StackLayout>
+        <Frame BorderColor="Transparent" BackgroundColor="#739364"
+   CornerRadius="50" Margin="35, 10, 35, 35">
+
+
+            <StackLayout>
+                <Image Source="https://i.ibb.co/1fgR66k/Frosty-Frost-Logo.png" WidthRequest="200" Margin="0,0,20,0" HeightRequest="150"></Image>
+            </StackLayout>
+        </Frame>
+        <Frame>
+            <StackLayout>
+                <ListView x:Name="listView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"/>
+                                        <!-- Adjust width ratios as needed -->
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <!-- Button width based on content -->
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0" Text="{Binding Fecha_Creacion}" FontSize="11" TextColor="Black"/>
+                                    <Label Grid.Column="1" Text="{Binding Estado}" FontSize="11" TextColor="Black"/>
+                                    <Label Grid.Column="2" Text="{Binding Total}" FontSize="11" TextColor="Black"/>
+
+                                    <ImageButton Grid.Column="3" Source="https://i.ibb.co/sJL0g9b/trash.png" Clicked="borrar_item" CommandParameter="{Binding Id}" BackgroundColor="Transparent" Margin="5" WidthRequest="20"/>
+                                    <ImageButton Grid.Column="4" Source="https://i.ibb.co/GTCtPJ3/check.png" Clicked="check_item" CommandParameter="{Binding Id}" BackgroundColor="Transparent" Margin="5"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </Frame>
+
+    </StackLayout>
+
+</ContentPage>

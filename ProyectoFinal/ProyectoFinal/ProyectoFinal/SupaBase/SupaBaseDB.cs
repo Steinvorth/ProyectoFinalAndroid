@@ -452,7 +452,54 @@ namespace ProyectoFinal.SupaBase
                 throw new Exception("Error al crear la orden");
             }
         }
+
+        public async Task<List<OrdenCompra>> SelectOrdenCompra()
+        {
+            try
+            {
+                var res = await _supabase.From<OrdenCompra>()
+                .Get();
+
+                return res.Models;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error al insertar detalleOrden:{ex}");
+                throw new Exception("Error al crear la orden");
+            }
+        }
+
+        public async Task DeleteOrdenCompra(int ordenId)
+        {
+            try
+            {
+                await _supabase.From<OrdenCompra>()
+                    .Where(x => x.Id == ordenId)
+                    .Delete();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error al borrar la orden de compra: {ex}");
+                throw new Exception("Error al borrar la orden de compra!");
+            }
+        }
         
+        public async Task CompletarOrdenCompra(int ordenId, string estado)
+        {
+            try
+            {
+                await _supabase.From<OrdenCompra>()
+                    .Where(x => x.Id == ordenId)
+                    .Set(x => x.Estado, estado)
+                    .Update();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error al completar la orden de compra: {ex}");
+                throw new Exception("Error al completar la orden de compra!");
+            }
+        }
+
         //Crud Pago
         public async Task InsertPago(Pago pago)
         {
@@ -466,6 +513,7 @@ namespace ProyectoFinal.SupaBase
                 throw new Exception("Error al crear el pago");
             }
         }
+
 
     }
 }
