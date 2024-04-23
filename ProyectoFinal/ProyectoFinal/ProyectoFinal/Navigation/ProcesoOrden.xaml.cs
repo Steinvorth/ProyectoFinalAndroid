@@ -44,7 +44,7 @@ namespace ProyectoFinal.Navigation
                 var ordenId = (int)button.CommandParameter;
 
                 //if we select yes, then delete
-                if (await DisplayAlert("Alerta", $"¿Estás seguro de que quieres eliminar la orden con ID: {ordenId}?", "Sí", "No"))
+                if (await DisplayAlert("Alerta", $"¿Estás seguro de que quieres eliminar la orden?", "Sí", "No"))
                 {
                     await supabase.DeleteOrdenCompra(ordenId);
                     GetOrdenes();
@@ -66,7 +66,7 @@ namespace ProyectoFinal.Navigation
                 var button = (ImageButton)sender;
                 var ordenId = (int)button.CommandParameter;
 
-                if (await DisplayAlert("Alerta", $"¿Estás seguro de que quieres marcar la orden con ID: {ordenId} como entregada?", "Sí", "No"))
+                if (await DisplayAlert("Alerta", $"¿Estás seguro de que quieres marcar la orden como entregada?", "Sí", "No"))
                 {
                     await supabase.CompletarOrdenCompra(ordenId, "Completado");
                     GetOrdenes();
